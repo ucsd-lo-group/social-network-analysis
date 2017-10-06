@@ -1,22 +1,27 @@
 # UCSD Lo Lab Group Social Network Analysis Script
+# Run script as Source with Echo in RStudio for user input process, else script will fail
 
 # Loads Junk Variable
 gcheckfalse = 0
 
-# load the library
+## load the library
 library(igraph)
 
-# import EdgeList and prompt; run as Source with Echo to get user input
+## Data Import
+# Asks user to seelct the data to import
 importedData <- read.csv(file.choose(), header = TRUE)
+# Promopts user to state if data is directed and confirm with 1 or 0
 userInputdir <- readline("Is your data directed? Please enter 1 for TRUE or 0 for FALSE\t")
 ifelse(userInputdir == 1, outcomeBool <- "TRUE", outcomeBool <- "FALSE")
-
-g <- graph.data.frame(importedData, directed = outcomeBool) # Gets edgelist
-
-# import weight list; run as Source with Echo to get user input
+# Imports data based on directionality
+g <- graph.data.frame(importedData, directed = outcomeBool) 
+# Asks user if there is a weight for the imported data list
 userInputweightaccept <- readline("Do you have a weighted list? Please enter 1 for TRUE or 0 for FALSE\t")
+# Based on user prompt, script will ask user to select file for list
+# If user states that there is no weighted list, then script will just check against junk variable
 ifelse(userInputweightaccept ==1, g_weight <- importedData_weight <- read.csv(file.choose(), header = TRUE), gcheckfalse == 0)
-E(g)$weight <- sample(seq_len(ecount(g)))
+# Creates an attribute for weight
+E(g)$weight <- g_weight
 
 # Creates and graphs weighted adjacency matrix from edgelist
 ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
@@ -32,8 +37,9 @@ nedge <- ecount(g) # Edge count
 nnode <- gorder(g) # Node count
 den <- edge_density(g, loops=TRUE) # Density with self interactions allowed
 inoutdeg <- degree(g) # Degrees of all nodes
-degavg <- mean(degree(g), weights = g_weight) # Average degree
-diam <- diameter(g, weights = g_weight) # Diameter of graph
+degavg.directional <- mean(degree(g)) # Average degree (both directions)
+degavg <- (mean(degree(g))/2) # Average degree based on first occurance
+diam <- diameter(g) # Diameter of graph
 
 strwkplotchk <- clusters(g, mode = "strong")$membership # Finding and plotting strong/weak clusters
 plot(g, vertex.color = strwkplotchk, edge.curved = FALSE)
