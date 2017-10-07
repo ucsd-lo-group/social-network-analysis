@@ -4,8 +4,10 @@
 # Loads Junk Variable
 gcheckfalse = 0
 
-## load the library
+## Checks for Pre-requisite Libraries
 library(igraph)
+#library(network)
+#library(sna)
 
 ## Data Import
 # Asks user to seelct the data to import
@@ -22,6 +24,7 @@ ifelse(userInputdir == 1, outcomeBool <- "TRUE", outcomeBool <- "FALSE")
 # Imports data based on directionality
 g <- graph.data.frame(importedData, directed = outcomeBool) 
 
+
 # Asks user if there is a weight for the imported data list
 userInputweightaccept <- readline("Do you have a weighted list? Please enter 1 for TRUE or 0 for FALSE\t")
 
@@ -32,14 +35,18 @@ ifelse(userInputweightaccept ==1, importedData_weight <- read.csv(file.choose(),
 # Converts user input list to numeric value
 g_weight <- lapply(importedData_weight, as.numeric)
 
-
 # Creates an attribute for weight
 E(g)$weight <- g_weight
+#E(g)$weight <- g
 
-# Creates and graphs weighted adjacency matrix from edgelist
+# Creates Graph Adjacency Matrix
+graphadj <- get.adjacency(g)
+get.diameter(g, directed = userInputdir)
 ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
 gadj <- get.adjacency(g, sparse=FALSE) # Gets weighted adjacency matrix
 graphedadj <- graph.adjacency(gadj, mode = outcome, weighted = TRUE)
+
+# Creates Plot of Social Network Graph
 plot(graphedadj) # WORK IN PROGRESS
 
 # plot the data using straight lines (curved algorithm causes warnings)
