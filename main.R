@@ -41,19 +41,16 @@ if(userInputweightaccept == 1)
   importedData_weight <- read.csv(file.choose())
 } 
 # Converts user input list to numeric value
-#ifelse(userInputweightaccept == 1, g_weight, noweightlist == 0)
 if(userInputweightaccept == 1)
 {
   g_weight <- unlist(importedData_weight)
 }
 # Creates an attribute for weight
-#ifelse(userInputweightaccept == 1, E(g)$weight, noweightattr == 0)
 if(userInputweightaccept == 1)
 {
   E(g)$weight <- g_weight
 }
 # Confirms that the graph is weighted
-#ifelse(userInputweightaccept == 1, graph_weighted, noweightconf == 0)
 if(userInputweightaccept == 1)
 {
   graph_weighted <- is.weighted(g)
@@ -97,9 +94,9 @@ diam <- diameter(g, directed = userInputdir)
 recip <- reciprocity(g, mode = "default")
 # Finding and plotting strong/weak clusters
 strwkplotchk <- clusters(g, mode = "strong")$membership 
-plot_cluster <- plot(g, vertex.color = strwkplotchk, edge.curved = FALSE)
+#plot_cluster <- plot(g, vertex.color = strwkplotchk, edge.curved = FALSE)
 # WORK IN PROGRESS - GRAPH LABELING
-title(cat("Weak/Strong Cluster Graph of", project_name)) # Titles second plot, but does not title the plot
+#title(cat("Weak/Strong Cluster Graph of", project_name)) # Titles second plot, but does not title the plot
 
 # Creates a vector based on short walkthroughs to find communities
 membershipvec <- cluster_walktrap(g) 
