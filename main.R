@@ -50,11 +50,9 @@ if(userInputweightaccept == 1)
 {
   E(g)$weight <- g_weight
 }
-# Confirms that the graph is weighted
-if(userInputweightaccept == 1)
-{
-  graph_weighted <- is.weighted(g)
-}
+# Checks if the graph is weighted
+graph_weighted <- is.weighted(g)
+
 # Creates Graph Adjacency Matrix
 graphadj <- get.adjacency(g)
 get.diameter(g, directed = userInputdir)
