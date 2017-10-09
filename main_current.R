@@ -69,7 +69,6 @@ graph_weighted <- is.weighted(g)
 
 # Creates Graph Adjacency Matrix
 ifelse(userInputweightaccept ==1, graphadj <- as_adjacency_matrix(g, attr = "weight"), graphadj <- as_adjacency_matrix(g))
-get_graph_diameter <- get.diameter(g, directed = userInputdir)
 ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
 ifelse(userInputweightaccept == 1, outcome_weight <- "TRUE", outcome_weight <- "FALSE")
 graphedadj <- graph.adjacency(graphadj, mode = outcome, weighted = outcome_weight)
@@ -146,6 +145,8 @@ if(userInputdir == 0)
 {
   relsubmod <- modularity(g, membership(membershipvec), weights = g_weight)
 }
+# Get.Graph Diameter
+get_graph_diameter <- get.diameter(g, directed = userInputdir)
 
 #####################################################################################################################
 ## Centrality of Network Members
