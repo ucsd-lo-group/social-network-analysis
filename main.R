@@ -62,15 +62,38 @@ ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
 # Gets weighted adjacency matrix
 gadj <- get.adjacency(g, edges = TRUE, sparse = TRUE) 
 graphedadj <- graph.adjacency(gadj, mode = outcome, weighted = TRUE)
-# Creates Plot of Social Network Graph based on Fruchterman Reingold Projection
-plot_raw <- plot(graphedadj, layout = layout.fruchterman.reingold, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
-title(project_name)
+# Prompts User to select a graph Projection
 # Other Graph Projections that can be used
 # Replace "layout = layout.projection" with either of the following
 # layout.kamada.kawai
 # layout.reingold.tilford
 # layout.fruchterman.reingold
 # layout.bipartite
+cat("Please select your graph projection that you want to plot. Options include: \n")
+cat("Fruchterman Reingold = 0 (Default)\n")
+cat("Kamada Kawai = 1\n")
+cat("Reingold Tilfold = 2\n")
+cat("Bipartite = 3\n")
+graph_projection_input <- readline("Selection:  \t")
+if(graph_projection_input == 0)
+{
+  graph_layout_input = layout.fruchterman.reingold
+}
+if(graph_projection_input == 1)
+{
+  graph_layout_input = layout.kamada.kawai
+}
+if(graph_projection_input == 2)
+{
+  graph_layout_input = layout.reingold.tilford
+}
+if(graph_projection_input == 3)
+{
+  graph_layout_input = layout.bipartite
+}
+# Creates Plot of Social Network Graph based on selected projection
+plot_raw <- plot(graphedadj, layout = graph_layout_input, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
+title(project_name)
 
 #####################################################################################################################
 ## Core Basic Analysis Parameters
