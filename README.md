@@ -8,4 +8,3 @@ Licensed under MIT License
 Baseline code written in R that provide analysis of social networks using the igraph package. 
 
 Project is currently in progress and will contain errors. 
-Current Version Notes: Weight not validated properly and system still outputs read errors
