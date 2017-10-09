@@ -68,7 +68,7 @@ if(userInputweightaccept == 1)
 graph_weighted <- is.weighted(g)
 
 # Creates Graph Adjacency Matrix
-graphadj <- as_adjacency_matrix(g, attr = "weight")
+ifelse(userInputweightaccept ==1, graphadj <- as_adjacency_matrix(g, attr = "weight"), graphadj <- as_adjacency_matrix(g))
 get_graph_diameter <- get.diameter(g, directed = userInputdir)
 ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
 ifelse(userInputweightaccept == 1, outcome_weight <- "TRUE", outcome_weight <- "FALSE")
