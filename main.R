@@ -11,12 +11,20 @@ gcheckfalse = 0
 
 #####################################################################################################################
 ## Checks for Pre-requisite Libraries
+# Loads the igraph library package
 library(igraph)
+
+# Loads the network library package
 #library(network)
+
+# Loads the SNA library package
 #library(sna)
 
 #####################################################################################################################
 ## Data Import
+# Asks user for a name for the project
+project_name <- readline("What is the name of your project?\t")
+
 # Asks user to seelct the data to import
 importedData <- read.csv(file.choose(), header = TRUE)
 
@@ -52,28 +60,40 @@ ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
 gadj <- get.adjacency(g, edges = TRUE, sparse = TRUE) 
 graphedadj <- graph.adjacency(gadj, mode = outcome, weighted = TRUE)
 
-# Creates Plot of Social Network Graph
-plot_raw <- plot(graphedadj) # WORK IN PROGRESS - GRAPH WITH WEIGHTS
+# Creates Plot of Social Network Graph based on Fruchterman Reingold Projection
+plot_raw <- plot(graphedadj, layout = layout.fruchterman.reingold, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
+title(project_name)
 
-# plot the data using straight lines (curved algorithm causes warnings)
-plot_raw_straight <- plot(g, edge.curved = FALSE)
+# Other Graph Projections that can be used
+# Replace "layout = layout.projection" with either of the following
+# layout.kamada.kawai
+# layout.reingold.tilford
+# layout.fruchterman.reingold
+# layout.bipartite
 
 #####################################################################################################################
 ## Core Basic Analysis Parameters
 # Edge Count
 nedge <- ecount(g)
+
 # Node Count
 nnode <- gorder(g)
+
 # Density with self interactions allowed
 den <- edge_density(g, loops=TRUE) 
+
 # Degrees of all nodes
 inoutdeg <- degree(g) 
+
 # Average degree (both directions)
 degavg.directional <- mean(degree(g)) 
+
 # Average degree based on first occurance
 degavg <- (mean(degree(g))/2) 
+
 # Diameter of graph
 diam <- diameter(g, directed = userInputdir) 
+
 # Finding and plotting strong/weak clusters
 strwkplotchk <- clusters(g, mode = "strong")$membership 
 plot_cluster <- plot(g, vertex.color = strwkplotchk, edge.curved = FALSE)
