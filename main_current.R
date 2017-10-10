@@ -109,6 +109,8 @@ if(graph_projection_input == 3)
 # Creates Plot of Social Network Graph based on selected projection
 plot_raw <- plot(graphedadj, layout = graph_layout_input, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
 title(project_name)
+# Progress Check cat Call
+cat("One Moment Please... \n")
 
 #####################################################################################################################
 ## Core Basic Analysis Parameters
