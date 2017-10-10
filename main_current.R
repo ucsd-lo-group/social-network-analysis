@@ -1,6 +1,7 @@
 #####################################################################################################################
 # Run script with ECHO off, source('~/path/to/main_current.R/', echo=FALSE)
-cat("Please note that this script will clear your environment workspace\n")
+cat("Please note that this script will clear your current environment workspace\n")
+cat("You must have the 'igraph' library installed for continuing...\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
 #####################################################################################################################
@@ -11,7 +12,6 @@ cat("\014")
 
 #####################################################################################################################
 # UCSD Lo Lab Group Social Network Analysis Script
-# Run script as Source with Echo in RStudio for user input process, else script will fail
 # MIT License
 # Written by Albert Chai and Joshua Pei Le
 # Principal Investigator: Stanley M. Lo
@@ -143,7 +143,11 @@ submod <- modularity(membershipvec)
 # Calculate modularity can be calculated based on graph directionality (must be undirected)
 if(userInputdir == 0)
 {
-  relsubmod <- modularity(g, membership(membershipvec), weights = g_weight)
+  if(userInputweightaccept==1)
+    {
+    relsubmod <- modularity(g, membership(membershipvec), weights = g_weight)
+    }
+  relsubmod <- modularity(g, membership(membershipvec))
 }
 # Get.Graph Diameter
 get_graph_diameter <- get.diameter(g, directed = userInputdir)
@@ -158,6 +162,9 @@ centbtwn <- centralization.betweenness(g, directed = userInputdir, normalized = 
 
 #####################################################################################################################
 ## Summary of Important Variables of Analysis
+cat("\n")
+cat("A summary of your analysis is ready for you to review. Your console will be cleared to avoid confusion.\n")
+invisible(readline(prompt="Press [enter] to continue\n"))
 # Clears R Console
 cat("\014")
 # Begin Summary Presentation
