@@ -80,13 +80,28 @@ ifelse(userInputweightaccept ==1, graphadj <- as_adjacency_matrix(g, attr = "wei
 ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
 ifelse(userInputweightaccept == 1, outcome_weight <- "TRUE", outcome_weight <- "FALSE")
 graphedadj <- graph.adjacency(graphadj, mode = outcome, weighted = outcome_weight)
-# Prompts User to select a graph Projection
+# Prompts User to select a graph Projection and prompts for graphing
 # Other Graph Projections that can be used
 # Replace "layout = layout.projection" with either of the following
 # layout.kamada.kawai
 # layout.reingold.tilford
 # layout.fruchterman.reingold
 # layout.bipartite
+if(userInputdir == 1)
+{
+  if(userInputselfinteract == 1)
+  {
+    cat("Because of the conditions you have selected, it is recommended that you do not plot your network.\n")
+    cat("Errors may result requiring you to start the script again from source. \n")
+    graphrequest_approval <- readline("Are you sure you want to proceed? Please enter 1 for YES or 0 for NO\t")
+  }
+}
+if(userInputselfinteract == 0)
+{
+  graphrequest_approval <- readline("Do you want to plot your network? Please enter 1 for YES or 0 for NO\t")
+}
+if(graphrequest_approval == 1)
+{
 cat("Please select your graph projection that you want to plot. Options include: \n")
 cat("Fruchterman Reingold = 0 (Default)\n")
 cat("Kamada Kawai = 1\n")
@@ -117,6 +132,7 @@ if(graph_projection_input == 3)
 # Creates Plot of Social Network Graph based on selected projection
 plot_raw <- plot(graphedadj, layout = graph_layout_input, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
 title(project_name)
+}
 # Progress Check cat Call
 cat("One Moment Please... The cats are working...\n")
 
@@ -206,7 +222,10 @@ cat("***Please note that this result returns a path with the actual diameter.\n"
 cat("***If there are many shortest paths of the length of the diameter, then it returns the first one found.\n")
 cat("Average Degree: ", degavg, "\n")
 cat("Average Path Length: ", avg_path, "\n")
-cat("Graph Projection Used: ", graph_layout_select, "\n")
+if(graphrequest_approval == 1)
+{
+  cat("Graph Projection Used: ", graph_layout_select, "\n")
+}
 cat("Graph Adjency Matrix: \n")
 print(graphadj)
 cat("\n")
