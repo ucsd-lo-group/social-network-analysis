@@ -60,13 +60,10 @@ if(userInputweightaccept == 1)
   importedData_weight <- read.csv(file.choose())
 } 
 # Converts user input list to numeric value
-if(userInputweightaccept == 1)
-{
-  g_weight <- unlist(importedData_weight)
-}
 # Creates an attribute for weight
 if(userInputweightaccept == 1)
 {
+  g_weight <- unlist(importedData_weight)
   E(g)$weight <- g_weight
 }
 # Checks if the graph is weighted
