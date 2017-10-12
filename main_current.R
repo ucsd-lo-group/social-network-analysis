@@ -247,6 +247,7 @@ cat("***Please note that this result returns a path with the actual diameter.\n"
 cat("***If there are many shortest paths of the length of the diameter, then it returns the first one found.\n")
 cat("Average Degree: ", degavg, "\n")
 cat("Average Path Length: ", avg_path, "\n")
+cat("Unrestricted Modularity: ", submod, "\n")
 if(graphrequest_approval == 1)
 {
   cat("Graph Projection Used: ", graph_layout_select, "\n")
