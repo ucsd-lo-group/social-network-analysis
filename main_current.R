@@ -21,11 +21,6 @@ cat("MIT License\n")
 cat("\n")
 cat("By using this script, you agree that there is no warranty guaranteed by the authors and the results\n")
 cat("presented is up to the user for interpretation\n")
-userInputscriptaccept <- readline("Do you accept this agreement? Please enter 1 for YES or 0 for NO: \t")
-if(userInputscriptaccept == 0)
-{
-  stop()
-}
 cat("\n")
 cat("INSTRUCTIONS: \n")
 cat("Your edge lists must be in the following format with one column for 'From' and one column for 'To'.\n")
@@ -50,7 +45,22 @@ library(igraph)
 # Asks user for a name for the project
 project_name <- readline("What is the name of your project?\t")
 
-# Asks user to seelct the data to import
+#####################################
+# Prompts user to state if data has non-participants in the data set
+#cat("Does your data set contain any non-participants? \n")
+#userInputnonpart <- readline("Please enter 1 for YES or 0 for NO: \t")
+
+# Asks user to import data adjusting for non-participants in network
+#if(userInputnonpart ==1)
+#{
+#  cat("In addition to your edge and weight lists, you must have a separate nodes list...\n")
+#  # Asks user to import their nodes list
+#  cat("Please import your nodes list \n")
+#  cat("Awaiting for user selection... \n")
+#  nodes <- read.csv(file.choose(), header = TRUE)
+#}
+#####################################
+# Asks user to select the data to import
 cat("Please import your edge list \n")
 cat("Awaiting for user selection... \n")
 importedData <- read.csv(file.choose(), header = TRUE)
@@ -60,6 +70,7 @@ userInputdir <- readline("Is your data directed? Please enter 1 for TRUE or 0 fo
 ifelse(userInputdir == 1, outcomeBool <- "TRUE", outcomeBool <- "FALSE")
 
 # Imports data based on directionality
+# For no non-participants in network (Normal)
 g <- graph.data.frame(importedData, directed = outcomeBool)
 
 # Asks user if there is a weight for the imported data list
