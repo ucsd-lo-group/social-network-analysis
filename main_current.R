@@ -24,7 +24,7 @@ cat("presented is up to the user for interpretation\n")
 cat("\n")
 cat("INSTRUCTIONS: \n")
 cat("Your edge lists must be in the following format with one column for 'From' and one column for 'To'.\n")
-cat("The top row is automatically ignored because it assumes it as a header\n")
+cat("The top row is normally ignored because it assumes it as a header, but accepted if processed using the lab's MATLAB script\n")
 cat("You will also be prompted to decide if your data is directed, weighted, and if self-interactions are allowed\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
@@ -323,6 +323,7 @@ if(export_approval ==1)
 if(export_approval == 1)
 {
   cat("Your results have been exported as ", project_name, "\n")
-  cat("Check in your root Document directory for the exported file \n")
+  cat("Check in your Current Working Directory of your console for the exported file \n")
+  cat("The default directory is ~/ \n")
   cat("The cats will now go back to purrrring...\n")
 }
