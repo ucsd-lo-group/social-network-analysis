@@ -45,25 +45,15 @@ library(igraph)
 # Asks user for a name for the project
 project_name <- readline("What is the name of your project?\t")
 
-#####################################
-# Prompts user to state if data has non-participants in the data set
-#cat("Does your data set contain any non-participants? \n")
-#userInputnonpart <- readline("Please enter 1 for YES or 0 for NO: \t")
+# Asks user if data was processed using MATLAB SNA Script
+# MATLAB SNA Script exports .csv files without headers, so script sets headers as FALSE for all imports in session
+matlabsnaprocess <- readline("Was your data processed using the MATLAB SNA script? Please enter 1 for TRUE or 0 for FALSE: \t")
+ifelse(matlabsnaprocess == 1, outcomeHeader <- FALSE, outcomeHeader <- TRUE)
 
-# Asks user to import data adjusting for non-participants in network
-#if(userInputnonpart ==1)
-#{
-#  cat("In addition to your edge and weight lists, you must have a separate nodes list...\n")
-#  # Asks user to import their nodes list
-#  cat("Please import your nodes list \n")
-#  cat("Awaiting for user selection... \n")
-#  nodes <- read.csv(file.choose(), header = TRUE)
-#}
-#####################################
 # Asks user to select the data to import
 cat("Please import your edge list \n")
 cat("Awaiting for user selection... \n")
-importedData <- read.csv(file.choose(), header = TRUE)
+importedData <- read.csv(file.choose(), header = outcomeHeader)
 
 # Prompts user to state if data is directed and confirm with 1 or 0
 userInputdir <- readline("Is your data directed? Please enter 1 for TRUE or 0 for FALSE: \t")
@@ -82,7 +72,7 @@ if(userInputweightaccept == 1)
 {
   cat("Please import your weight list \n")
   cat("Awaiting for user selection... \n")
-  importedData_weight <- read.csv(file.choose())
+  importedData_weight <- read.csv(file.choose(), header = outcomeHeader)
 }
 # Converts user input list to numeric value
 # Creates an attribute for weight
