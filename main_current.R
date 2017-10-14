@@ -236,9 +236,27 @@ centbtwn <- centralization.betweenness(g, directed = userInputdir, normalized = 
 
 ############################################################################################
 ## Summary of Important Variables of Analysis
+# Prompts user that their results are ready for viewing and option to export results as file
 cat("\n")
+cat("The cats have finished!\n")
 cat("A summary of your analysis is ready for you to review. \n")
+cat("Do you want your results to be automatically exported to a text file? \n")
+export_approval <- readline("Please enter 1 for YES or 0 for NO: \t")
+# Allows user to customize the path and filename of the file, else goes to default settings
+#if(export_approval == 1)
+#{
+#  cat("Do you have a specific directory/filename you want to save your results as?\n")
+#  cat("If you do not specify any name/directory, it will be saved in your document root\n")
+#  cat("as your project name variable\n")
+#  export_approval_nameproj <- readline("Please enter 1 for YES or 0 for NO: \t")
+#  if(export_approval_nameproj == 1)
+#  {
+#    export_project_fullpath <- readline("What is the directory and file name where you want to save your results to?\t")
+#  }
+#}
+# Prompts the user if they want to clear their console before viewing results
 cat("Do you want your console cleared before showing your results?\n")
+cat("This option is STRONGLY recommended if you want your results exported as a text file.\n")
 summary_clear <-readline("Please enter 1 for YES or 0 for NO: \t")
 
 # Clears R Console if user requests
@@ -249,6 +267,15 @@ if(summary_clear ==1)
 
 # Begin Summary Presentation
 cat("********************************************************************************************\n")
+# Based on user option for export, console begins printing results to file directly. 
+if(export_approval ==1)
+{
+#  if(export_approval_nameproj == 1)
+#  {
+#    sink(file=export_project_fullpath, append = FALSE, type = c("output"), split = FALSE)
+#  }
+  sink(file=project_name, append = FALSE, type = c("output"), split = FALSE)
+}
 cat("Social Network Analysis Summary of Project\n")
 cat("Summmary of project: ", project_name, "\n")
 cat("Current Date and Date: ")
@@ -291,3 +318,19 @@ cat("\n")
 cat("Network Centrality - Betweeness: \n")
 print(centbtwn)
 cat("\n")
+# Turns of console export and returns normal echo back to console
+if(export_approval ==1)
+{
+  sink()
+}
+#if(export_approval_nameproj == 1)
+#{
+#  sink()
+#}
+# Notifies user that the requested export job has been completed.
+if(export_approval == 1)
+{
+  cat("Your results have been exported as ", project_name, "\n")
+  cat("Check in your root Document directory for the exported file \n")
+  cat("The cats will now go back to purrrring...\n")
+}
