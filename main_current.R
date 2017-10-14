@@ -269,7 +269,7 @@ if(export_approval ==1)
 ######## SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT #########
 cat("Social Network Analysis Summary of Project\n")
 cat("Summmary of project: ", project_name, "\n")
-cat("Current Date and Date: ")
+cat("Current Date and Time: ")
 print(Sys.time())
 cat("\n")
 cat("Weighted Graph: ", graph_weighted, "\n")
