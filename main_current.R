@@ -276,6 +276,7 @@ if(export_approval ==1)
 #  }
   sink(file=project_name, append = FALSE, type = c("output"), split = FALSE)
 }
+######## SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT #########
 cat("Social Network Analysis Summary of Project\n")
 cat("Summmary of project: ", project_name, "\n")
 cat("Current Date and Date: ")
@@ -318,6 +319,7 @@ cat("\n")
 cat("Network Centrality - Betweeness: \n")
 print(centbtwn)
 cat("\n")
+##### NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED #####
 # Turns of console export and returns normal echo back to console
 if(export_approval ==1)
 {
