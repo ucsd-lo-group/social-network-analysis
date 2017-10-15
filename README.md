@@ -4,9 +4,10 @@
 Principal Investigator: Stanley M. Lo - smlo[at]ucsd[dot]edu
 
 Scripts written by : Albert Chai - a1chai[at]ucsd[dot]edu; Joshua P. Le - jpl038[at]ucsd[dot]edu
+
 Licensed under MIT License
 
 Baseline code written in R that provide analysis of social networks using the igraph package. 
 
 Project is currently in progress and will contain errors. Check Wiki pages for progress updates and other documentation.
-Made with <3 at the Lo Lab Group
+Made by the Cats with <3 at the Lo Lab Group
