@@ -3,7 +3,7 @@
 
 Principal Investigator: Stanley M. Lo - smlo[at]ucsd[dot]edu
 
-Scripts written by : Albert Chai - a1chai[at]ucsd[dot]edu; Joshua P. Le - jpl038[at]ucsd[dot]edu
+Scripts written by : Albert Chai - a1chai[at]ucsd[dot]edu; Joshua P. Le - jpl038[at]ucsd[dot]edu; Andrew S. Lee - aleet383[at]g[dot]ucla[dot]edu
 
 Licensed under MIT License
 
