@@ -41,7 +41,7 @@ disp('Please indicate the file name with extension in single quotes in your MATL
 disp("such as 'case3-raw.csv'")
 disp('MATLAB will reprompt you for the file if the syntax is incorrect!')
 userInput = input('File: ');
-importfile(userInput);
+[q,r] = importfile(userInput);
 disp('Data import has been completed...')
 
 %% Maximum number of participants in the group
