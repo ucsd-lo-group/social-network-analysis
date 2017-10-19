@@ -322,7 +322,7 @@ if(export_approval ==1)
 # Notifies user that the requested export job has been completed.
 if(export_approval == 1)
 {
-  cat("Your results have been exported as ", project_name, "\n")
+  cat("Your results have been exported as ",project_name, "\n")
   cat("Check in your Current Working Directory of your console for the exported file \n")
   cat("The default directory is ~/ \n")
   cat("The cats will now go back to purrrring...\n")
