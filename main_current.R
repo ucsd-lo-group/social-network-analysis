@@ -1,16 +1,15 @@
-############################################################################################
+# Code Execution Notes --------------------------------------------------------------------
 # Run script with ECHO off, source('~/path/to/main_current.R/', echo=FALSE)
 cat("Please note that this script will clear your current environment workspace\n")
 cat("You must have the 'igraph' library installed before continuing...\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
-############################################################################################
-# Clears R Environment Variables
+# Clears R Environment Variables --------------------------------------------------------------------
 rm(list=ls())
 # Clears R Console
 cat("\014")
 
-############################################################################################
+# Introduction --------------------------------------------------------------------
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
 # Written by Albert Chai and Joshua Pei Le
@@ -28,8 +27,7 @@ cat("The top row is normally ignored because it assumes it as a header, but acce
 cat("You will also be prompted to decide if your data is directed, weighted, and if self-interactions are allowed\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
-############################################################################################
-## Checks for Pre-requisite Libraries
+## Checks for Pre-requisite Libraries --------------------------------------------------------------------
 # Loads the igraph library package
 cat("Loading the igraph library package\n")
 library(igraph)
@@ -40,8 +38,7 @@ library(igraph)
 # cat("Loading the sna library package\n")
 # library(sna)
 
-############################################################################################
-## Data Import and User Input (Information Collection)
+## Data Import and User Input (Information Collection) --------------------------------------------------------------------
 # Asks user for a name for the project
 project_name <- readline("What is the name of your project?\t")
 
@@ -154,8 +151,7 @@ title(project_name)
 # Progress Check cat Call
 cat("One Moment Please... The cats are working...\n")
 
-############################################################################################
-## Core Basic Analysis Parameters
+## Core Basic Analysis Parameters --------------------------------------------------------------------
 # Edge Count
 nedge <- ecount(g)
 
@@ -214,8 +210,7 @@ if(userInputdir == 0)
 # Get.Graph Diameter
 get_graph_diameter <- get.diameter(g, directed = outcomeBool)
 
-############################################################################################
-## Centrality of Network Members
+## Centrality of Network Members --------------------------------------------------------------------
 central <- centr_degree(g, mode = c("all", "out", "in", "total"), loops = FALSE, normalized = TRUE)
 
 # Centrality based on Eigenvector Centrality
@@ -224,8 +219,7 @@ centeigen <- centr_eigen(g,directed = userInputdir, scale = TRUE, normalized = T
 # Centrality based on Betweenness
 centbtwn <- centralization.betweenness(g, directed = userInputdir, normalized = TRUE)
 
-############################################################################################
-## Summary of Important Variables of Analysis
+## Summary of Important Variables of Analysis --------------------------------------------------------------------
 # Prompts user that their results are ready for viewing and option to export results as file
 cat("\n")
 cat("The cats have finished!\n")
