@@ -264,7 +264,7 @@ if(export_approval ==1)
 #  {
 #    sink(file=export_project_fullpath, append = FALSE, type = c("output"), split = FALSE)
 #  }
-  sink(file=project_name, append = FALSE, type = c("output"), split = FALSE)
+  sink(file=paste(project_name, ".txt"), append = FALSE, type = c("output"), split = FALSE)
 }
 ######## SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT #########
 cat("Social Network Analysis Summary of Project\n")
