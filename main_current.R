@@ -14,9 +14,11 @@ cat("\014")
 # MIT License
 # Written by Albert Chai and Joshua Pei Le
 # Principal Investigator: Stanley M. Lo
+# Current Script Version: 0.4-beta-103017
 cat("UCSD Lo Lab Group Social Network Analysis Script\n")
 cat("Written by Albert Chai and Joshua Pei Le\n")
 cat("MIT License\n")
+cat("Current Script Engine Version Build: 0.4-beta-103017")
 cat("\n")
 cat("By using this script, you agree that there is no warranty guaranteed by the authors and the results\n")
 cat("presented is up to the user for interpretation\n")
@@ -39,6 +41,9 @@ library(igraph)
 # library(sna)
 
 ## Data Import and User Input (Information Collection) --------------------------------------------------------------------
+# Sets current script version for Info Print Out
+scriptversionRead <- "0.4-beta-103017"
+
 # Asks user for a name for the project
 project_name <- readline("What is the name of your project?\t")
 
@@ -262,6 +267,7 @@ if(export_approval ==1)
 }
 ######## SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT #########
 cat("Social Network Analysis Summary of Project\n")
+cat("Current Script Engine Version Build: ", scriptversionRead, "\n")
 cat("Summmary of project: ", project_name, "\n")
 cat("Current Date and Time: ")
 print(Sys.time())
@@ -316,7 +322,7 @@ if(export_approval ==1)
 # Notifies user that the requested export job has been completed.
 if(export_approval == 1)
 {
-  cat("Your results have been exported as ",project_name, "\n")
+  cat("Your results have been exported as ",paste(project_name,".txt"), "\n")
   cat("Check in your Current Working Directory of your console for the exported file \n")
   cat("The default directory is ~/ \n")
   cat("The cats will now go back to purrrring...\n")
