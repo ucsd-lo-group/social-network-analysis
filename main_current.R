@@ -1,20 +1,49 @@
-# Code Execution Notes --------------------------------------------------------------------
+## Code Execution Notes --------------------------------------------------------------------
 # Run script with ECHO off, source('~/path/to/main_current.R/', echo=FALSE)
 cat("Please note that this script will clear your current environment workspace\n")
 cat("You must have the 'igraph' library installed before continuing...\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
-# Clears R Environment Variables --------------------------------------------------------------------
+## Clears R Environment Variables --------------------------------------------------------------------
 rm(list=ls())
 # Clears R Console
 cat("\014")
 
-# Introduction --------------------------------------------------------------------
+## R Version Code Check -------------------------------------------------
+# Find exact build and date of version R 3.4.2 and terminate script if version is non-compliant
+# Function checks if the user's R version is compliant with Source Code
+cat('One Moment Please, the cats are determining if your R version is compliant...\n')
+cat('This should be quick...\n')
+
+# Enter the current R version exactly under 'version.string' after running 'version' in the Console
+# Look for version.string = "R version 3.X.X (20XX-XX-XX)"
+# Current R string for current build: R version 3.4.2 (2017-09-28)
+setRversionread = "R version 3.4.2 (2017-09-28)"
+
+# Reversion Code Execute Check
+if(R.version$version.string == setRversionread){
+  versionapproval = 1
+}
+if(R.version$version.string != setRversionread){
+  versionapproval = 0
+}
+if(versionapproval == 1){
+  cat('The cats has found that your system is purrrfect...\n')
+  cat('R version code is compliant, script will proceed\n')
+  cat("\n")
+}
+if(versionapproval == 0){
+  cat('The cats are not happy because they found your system is not compliant\n ')
+  cat('R version code is not compliant, script will break\n')
+  stopifnot(versionapproval == 1)
+}
+
+## Introduction --------------------------------------------------------------------
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
 # Written by Albert Chai and Joshua Pei Le
 # Principal Investigator: Stanley M. Lo
-# Current Script Version: 0.4-beta-103017
+# Current Script Version: 0.4.2-beta-110617
 cat("UCSD Lo Lab Group Social Network Analysis Script\n")
 cat("Written by Albert Chai and Joshua Pei Le\n")
 cat("MIT License\n")
@@ -42,7 +71,7 @@ library(igraph)
 
 ## Data Import and User Input (Information Collection) --------------------------------------------------------------------
 # Sets current script version for Info Print Out
-scriptversionRead <- "0.4-beta-103017"
+scriptversionRead <- "0.4.2-beta-110617"
 
 # Asks user for a name for the project
 project_name <- readline("What is the name of your project?\t")
@@ -146,6 +175,25 @@ if(graph_projection_input == 3)
 {
   graph_layout_input = layout.bipartite
   graph_layout_select = "Bipartite"
+}
+
+# For generating colored nodes based on gender
+# Users must generate an corresponding color list based on corresponding nodes in node order list
+###### WORK IN PROGRESS!!!!!!!! Imported data does not generate corresponding colors.
+requestcolorednodeInput <- readline('Do you want to generate a colored graph, enter 1 for YES or 0 for NO: \n')
+if (requestcolorednodeInput == 1){
+  requestHeaderPrompt <- readline('Does your file have a header? Enter 1 for YES or 0 for NO: \n')
+  ifelse(requestHeaderPrompt == 1, requestHeaderPrompt <- TRUE, requestHeaderPrompt <- FALSE)
+  cat('Before we continue with the script, you must select colors that the program is able to generate\n')
+  cat('You may select from the following colors: \n')
+  cat('URL to igraph color help manual\n')
+  cat('Color1\n')
+  cat('Color2\n')
+  cat('When you are ready to proceed...\n')
+  invisible(readline(prompt="Press [enter] to continue\n"))
+  cat('Awaiting for user selection...\n')
+  importednodecolorData <- read.csv(file.choose(), header = requestHeaderPrompt)
+  V(g)$color <- importednodecolorData
 }
 
 # Creates Plot of Social Network Graph based on selected projection
