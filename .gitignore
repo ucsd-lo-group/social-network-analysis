@@ -1,0 +1,6 @@
+# git will ignore these files when committing, pushing, pulling
+
+# OS X generated files
+*.DS_Store
+
+*.andrew
