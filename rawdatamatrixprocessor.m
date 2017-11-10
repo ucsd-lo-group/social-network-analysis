@@ -90,53 +90,40 @@ maxconfirm=input('Confirm by entering 1 if the value is correct: ');
 
 %% Total number of interactions 
 % intot determines the total number of interactions the members in the group has. Based on the vall matrix grid.
-intot = length(vall);
+intot = length(vall)-1; % last row doesn't count
 disp(' ')
 fprintf('STATUS: The total number of interactions is %d. \n',intot)
 
 %% Member Discussion Order
-% Prepares for creating order in which members of group talk to one another
-vall2 = vall(2:end);
-% vall3 indexes first value of vall to add to the end creating vall4
-vall3 = vall(1);
-vall4 = [vall2;vall3];
-% vallm is the order file from source to target in which members in group talk
-vallm = [vall,vall4];
+% Determines the order in which members discussed
+
+% Create edges that show who talked to whom
+% assume the person in line n talked to person in line n+1
+% assume the file has >= 2 lines
+% edge case: the person in last line does not talk to anyone
+vallm = [vall(1:end-1), vall(2:end)];
 disp('Discussion order has been created.')
 
 %% Student Matrix Interactions
 % Determines the number of times students interact with one another in a directed manner
-% Creates a matrix of the total number of active students
-serialact = 1:num_participants_active;
-% Transposes serialact into a vertical matrix
-serialact1 = serialact';
-% Creates a matrix of the total number of students
-serialtot = 1:num_participants_total;
-% Transposes serialtot into a vertical matrix
-serialtot1 = serialtot';
-% Begins creating first variable loop for active participants, num_participants_active is used.
-    % A vector with the desired length of all possible combinations is preallocated with prealloc, values are zeros
-    disp('Script is preallocating vector size for all possible combinations...')
-    prealloc = zeros(num_participants_active*num_participants_active,2);
-    disp('Preallocation is complete')
-    
-% Indexing values of matrix for statistical analysis of data
-disp('Values are being populated...')
-for i = 1: 1: num_participants_active % i = 1, then 2, 3, 4, ... then lastly num_participants_active
-	for j = 1: 1: num_participants_active % j = 1, then 2, 3, 4, ... then lastly num_participants_active
-    row_num = (i-1)*num_participants_active + j; 
-    prealloc(row_num,1) = i;
-    prealloc(row_num,2) = j;
-	end
+% master is an adjacency matrix with weights 
+%   (nxn array, where master(i,j) = weight of edge (i,j))
+%   where n is the total number of participants
+%   weights are initialized to zero
+
+% Make all possible edges, initialize weight to zero
+disp('Script is preallocating vector size for all possible combinations...')
+    master = zeros(num_participants_total, num_participants_total);
+disp('Preallocation is complete')
+
+%% Calculate Weight for Edges
+for i = 1: 1: size(vallm)
+   source = vallm(i,1);
+   target = vallm(i,2);
+   master(source, target) = master(source, target) + 1;
 end
-disp('Combination population complete.')
 
-%% Calculate Total Number of Interactions with prealloc List
-% Creates new matrix called 'master_all' with all corresponding combinations
-% and respected weights
-
-% Creates new matrix called 'master' with all of the combination paris with
-% no weights removed
+disp("Hello world!");
 
 %% Export Final Results as .csv Files
 % Exports all of the calculated data into 2 .csv files, one with edge list

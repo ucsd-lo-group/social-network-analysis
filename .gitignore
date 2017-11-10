@@ -1,6 +1,12 @@
 # git will ignore these files when committing, pushing, pulling
+# Add your own files here!
+# Any line with "#" at beginning is a comment
+
+# swap (temporary) files
+*.*~
 
 # OS X generated files
 *.DS_Store
 
+# Andrew's stuff
 *.andrew
