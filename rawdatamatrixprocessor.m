@@ -106,35 +106,68 @@ disp('Discussion order has been created.')
 
 %% Student Matrix Interactions
 % Determines the number of times students interact with one another in a directed manner
-% master is an adjacency matrix with weights 
-%   (nxn array, where master(i,j) = weight of edge (i,j))
-%   where n is the total number of participants
-%   weights are initialized to zero
+% master_all is a n^2 x 3 matrix, format (source, target, weight)
+%   contains all edges
+% master is the same as master_all, except without edges weight <= 0
 
 % Make all possible edges, initialize weight to zero
 disp('Script is preallocating vector size for all possible combinations...')
-    master = zeros(num_participants_total, num_participants_total);
+    master_all = zeros(num_participants_total*num_participants_total, 3);
 disp('Preallocation is complete')
 
+disp('Values are being populated...')
+for i = 1: 1: num_participants_total % i = 1, then 2, 3, 4, ... then lastly num_participants_active
+	for j = 1: 1: num_participants_total % j = 1, then 2, 3, 4, ... then lastly num_participants_active
+        row_num = (i-1)*num_participants_total + j; 
+        master_all(row_num,1) = i;
+        master_all(row_num,2) = j;
+	end
+end
+disp('Combination population complete.')
+
 %% Calculate Weight for Edges
+% for each edge in vallm, find the edge in master_all that it matches
+% and add 1 to the current value
 for i = 1: 1: size(vallm)
    source = vallm(i,1);
    target = vallm(i,2);
-   master(source, target) = master(source, target) + 1;
+   master_all((source-1)*num_participants_total + target, 3) = master_all((source-1)*num_participants_total + target, 3) + 1;
 end
 
-disp("Hello world!");
+for i = 1: i: sum(master_all(:,3) <= 0) % 1,2,...number of rows with weight <= 0
+    num_zeros_filled = 0;
+    if (master_all(i,3) > 0)
+       
+    end
+end
+
+% make master
+% logic: master_all(:,3) > 0 returns an array of 1's and 0's
+%   only get the rows with weight greater than 0
+master = master_all(master_all(:,3) > 0, :);
 
 %% Export Final Results as .csv Files
 % Exports all of the calculated data into 2 .csv files, one with edge list
 % and one with weight list corresponding to the edge list.
 
 % Writes Edges List
-%edges = master(:,1:2);
-%csvwrite('edge_list.csv',edges);
-%disp('Edge list has been written, check under edge_list.csv')
+% parameters
+edges = master(:,1:2);
+edges_hdr = 'source,target';
+edges_file = 'edge_list.csv';
+
+% the actual write
+dlmwrite(edges_file, edges_hdr, 'delimiter', '');
+dlmwrite(edges_file,edges,'delimiter',',','-append');
+disp(strcat("Edge list has been written, check under ", edges_file))
 
 % Writes Weighted List
-%weight = master(:,3);
-%csvwrite('weight_list.csv',weight);
-%dips('Weight list has been written, check under weight_list.csv')
+% parameters
+weights = master(:,3);
+weights_hdr = 'weight';
+weights_file = 'weight_list.csv';
+
+% the actual write
+dlmwrite(weights_file, weights_hdr, 'delimiter', '');
+dlmwrite(weights_file,weights,'delimiter',',','-append');
+disp(strcat("Weight list has been written, check under ", weights_file))
