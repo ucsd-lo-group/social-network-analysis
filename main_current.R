@@ -43,7 +43,7 @@ if(versionapproval == 0){
 # MIT License
 # Written by Albert Chai and Joshua Pei Le
 # Principal Investigator: Stanley M. Lo
-# Current Script Version: 0.4.2-beta-110617
+# Current Script Version: 0.4.3-beta-110917
 cat("UCSD Lo Lab Group Social Network Analysis Script\n")
 cat("Written by Albert Chai and Joshua Pei Le\n")
 cat("MIT License\n")
@@ -71,15 +71,14 @@ library(igraph)
 
 ## Data Import and User Input (Information Collection) --------------------------------------------------------------------
 # Sets current script version for Info Print Out
-scriptversionRead <- "0.4.2-beta-110617"
+scriptversionRead <- "0.4.3-beta-110917"
 
 # Asks user for a name for the project
 project_name <- readline("What is the name of your project?\t")
 
-# Asks user if data was processed using MATLAB SNA Script
-# MATLAB SNA Script exports .csv files without headers, so script sets headers as FALSE for all imports in session
-matlabsnaprocess <- readline("Was your data processed using the MATLAB SNA script? Please enter 1 for TRUE or 0 for FALSE: \t")
-ifelse(matlabsnaprocess == 1, outcomeHeader <- FALSE, outcomeHeader <- TRUE)
+# Asks user if data has header in imported data set
+headerprocess <- readline("Does your data have a header? Please enter 1 for TRUE or 0 for FALSE: \t")
+ifelse(headerprocess == 1, outcomeHeader <- TRUE, outcomeHeader <- FALSE)
 
 # Asks user to select the data to import
 cat("Please import your edge list \n")
@@ -180,7 +179,7 @@ if(graph_projection_input == 3)
 # For generating colored nodes based on gender
 # Users must generate an corresponding color list based on corresponding nodes in node order list
 ###### WORK IN PROGRESS!!!!!!!! Imported data does not generate corresponding colors.
-requestcolorednodeInput <- readline('Do you want to generate a colored graph, enter 1 for YES or 0 for NO: \n')
+requestcolorednodeInput <- readline('Do you want to generate a colored graph, enter 1 for YES or 0 for NO: \t')
 if (requestcolorednodeInput == 1){
   requestHeaderPrompt <- readline('Does your file have a header? Enter 1 for YES or 0 for NO: \n')
   ifelse(requestHeaderPrompt == 1, requestHeaderPrompt <- TRUE, requestHeaderPrompt <- FALSE)
