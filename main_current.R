@@ -1,44 +1,19 @@
-## Code Execution Notes --------------------------------------------------------------------
+######### Code Execution Notes #########
 # Run script with ECHO off, source('~/path/to/main_current.R/', echo=FALSE)
 cat("Please note that this script will clear your current environment workspace\n")
 cat("You must have the 'igraph' library installed before continuing...\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
-## Clears R Environment Variables --------------------------------------------------------------------
+######### Clears R Environment Variables #########
 rm(list=ls())
 # Clears R Console
 cat("\014")
 
-## R Version Code Check -------------------------------------------------
-# Find exact build and date of version R 3.4.2 and terminate script if version is non-compliant
-# Function checks if the user's R version is compliant with Source Code
-#cat('One Moment Please, the cats are determining if your R version is compliant...\n')
-#cat('This should be quick...\n')
+######### Code Version Check #########
+# Sets current script version for Info Print Out
+scriptversionRead <- "0.4.3-beta-110917"
 
-# Enter the current R version exactly under 'version.string' after running 'version' in the Console
-# Look for version.string = "R version 3.X.X (20XX-XX-XX)"
-# Current R string for current build: R version 3.4.2 (2017-09-28)
-#setRversionread = "R version 3.4.2 (2017-09-28)"
-
-# Reversion Code Execute Check
-#if(R.version$version.string == setRversionread){
-#  versionapproval = 1
-#}
-#if(R.version$version.string != setRversionread){
-#  versionapproval = 0
-#}
-#if(versionapproval == 1){
-#  cat('The cats has found that your system is purrrfect...\n')
-#  cat('R version code is compliant, script will proceed\n')
-#  cat("\n")
-#}
-#if(versionapproval == 0){
-#  cat('The cats are not happy because they found your system is not compliant\n ')
-#  cat('R version code is not compliant, script will break\n')
-#  stopifnot(versionapproval == 1)
-#}
-
-## Introduction --------------------------------------------------------------------
+######### Introduction #########
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
 # Written by Albert Chai and Joshua Pei Le
@@ -47,7 +22,7 @@ cat("\014")
 cat("UCSD Lo Lab Group Social Network Analysis Script\n")
 cat("Written by Albert Chai and Joshua Pei Le\n")
 cat("MIT License\n")
-cat("Current Script Engine Version Build: 0.4-beta-103017")
+cat("Current Script Engine Version Build: ", scriptversionRead)
 cat("\n")
 cat("By using this script, you agree that there is no warranty guaranteed by the authors and the results\n")
 cat("presented is up to the user for interpretation\n")
@@ -58,21 +33,18 @@ cat("The top row is normally ignored because it assumes it as a header, but acce
 cat("You will also be prompted to decide if your data is directed, weighted, and if self-interactions are allowed\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
-## Checks for Pre-requisite Libraries --------------------------------------------------------------------
+######### Checks for Pre-requisite Libraries #########
 # Loads the igraph library package
 cat("Loading the igraph library package\n")
-library(igraph)
+require(igraph)
 # Loads the network library package
 # cat("Loading the network library package\n")
-# library(network)
+# require(network)
 # Loads the SNA library package
 # cat("Loading the sna library package\n")
-# library(sna)
+# require(sna)
 
-## Data Import and User Input (Information Collection) --------------------------------------------------------------------
-# Sets current script version for Info Print Out
-scriptversionRead <- "0.4.3-beta-110917"
-
+######### Data Import and User Input (Information Collection) #########
 # Asks user for a name for the project
 project_name <- readline("What is the name of your project?\t")
 
@@ -203,7 +175,7 @@ title(project_name)
 # Progress Check cat Call
 cat("One Moment Please... The cats are working...\n")
 
-## Core Basic Analysis Parameters --------------------------------------------------------------------
+######### Core Basic Analysis Parameters #########
 # Edge Count
 nedge <- ecount(g)
 
@@ -262,7 +234,7 @@ if(userInputdir == 0)
 # Get.Graph Diameter
 get_graph_diameter <- get.diameter(g, directed = outcomeBool)
 
-## Centrality of Network Members --------------------------------------------------------------------
+######### Centrality of Network Members #########
 central <- centr_degree(g, mode = c("all", "out", "in", "total"), loops = FALSE, normalized = TRUE)
 
 # Centrality based on Eigenvector Centrality
@@ -271,7 +243,11 @@ centeigen <- centr_eigen(g,directed = userInputdir, scale = TRUE, normalized = T
 # Centrality based on Betweenness
 centbtwn <- centralization.betweenness(g, directed = userInputdir, normalized = TRUE)
 
-## Subgraphs and Modularity --------
+# Articulation Points List 
+# Articuation points or cut vertices are vertices whose removal increases the number of connected components in a graph.
+artpoint <- articulation.points(g)
+
+######### Subgraphs and Modularity #########
 # Creates overview of possible cliques in network, Overall Subgraphs of networks
 overview_clique_table <- table(sapply(cliques(g),length))
 
@@ -285,12 +261,15 @@ maximal_clique_count <- maximal.cliques.count(g)
 listgencount <- 1
 
 # Does loop function for each group to output members list
-#while(listgencount <= maximal_clique_count)
-#{
-#  listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
-#  cat("Nodes in network size: ",listpartcount, "\n")
-#  print(listpartcount)
-#}
+# Function is under Summary of Variables for Analysis because of print function required
+##### MOVE SECTION TO PRINT SUMMARY SECTION #
+while(listgencount <= maximal_clique_count)
+{
+  listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
+  cat("Nodes in network size: ",listgencount, "\n")
+  print(listpartcount)
+  listgencount = listgencount + 1
+}
 
 # Determines core membranes of the group
 cores <- graph.coreness(g)
@@ -301,7 +280,27 @@ graph_symet_pre <- simplify(g)
 # Creates list of census of how symmetric the graph is 
 graph_symet <- dyad.census(graph_symet_pre)
 
-## Summary of Important Variables of Analysis --------------------------------------------------------------------
+# Generates density of each of the relative subgroups found
+# Example Code
+#g_subden1 <- induced.subgraph(g,neighborhood(g,1,1)[[1]])
+#subgraphdens <- graph.density(g_subden1)
+
+# Graph Connectedness Census
+g_comps <- decompose.graph(g)
+g_comps_table <- table(sapply(g_comps,vcount))
+
+# Generates a list the neighborhood of each of the nodes adjacent to one another
+neigh_g <- neighborhood(g)
+
+# Transitivity/Clustering Coefficients 
+# Measures the probability that the adjacent vertices of a vertex are connected
+#(Based on the number of triangles connected to vertex and triplets centered around vertex)
+# Transitivity of Local values
+g_trans_local <- transitivity(g,type = "local")
+# Transitivity of Global values
+g_trans_global <- transitivity(g,type = "global")
+
+######### Export of Summary of Important Variables of Analysis #########
 # Prompts user that their results are ready for viewing and option to export results as file
 cat("\n")
 cat("The cats have finished!\n")
@@ -342,8 +341,10 @@ if(export_approval ==1)
 #  }
   sink(file=paste(project_name, ".txt"), append = FALSE, type = c("output"), split = FALSE)
 }
-######## SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT #########
-cat("Social Network Analysis Summary of Project\n")
+#----------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -----------
+cat("University of California, San Diego - Lo Lab Group")
+cat("Social Network Analysis Script Results")
+cat("Summary of Project\n")
 cat("Current Script Engine Version Build: ", scriptversionRead, "\n")
 cat("Summmary of project: ", project_name, "\n")
 cat("Current Date and Time: ")
@@ -386,7 +387,45 @@ cat("\n")
 cat("Network Centrality - Betweeness: \n")
 print(centbtwn)
 cat("\n")
-##### NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED #####
+cat("**********************************************************************************")
+cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE")
+cat(
+  {"The researcher(s) are primary responsible for the interpretation of the results 
+    presented here with the script. The authors accept no liability for any errors that
+    may result in the procesing or the interpretation of your results. However, 
+    if you do encounter errors in the script that shouldn't have happened, let us know 
+    on our GitHub page"
+    })
+cat("From the Cats at the Lo Lab Group")
+cat("MIT License")
+cat("Copyright (c) 2017 Stanley M. Lo, Albert Chai, Joshua P. Le\n")
+cat("\n")
+cat(
+{"Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the 'Software'), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+\n"
+  })
+cat("\n")
+cat(
+  {"The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.\n"
+  }
+)
+cat("n")
+cat({
+  "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.\n"
+})
+#----------- NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED -----------
 # Turns of console export and returns normal echo back to console
 if(export_approval ==1)
 {
