@@ -5,6 +5,10 @@
 ####### Loads the Shiny App Library #######
 library(shiny)
 
+####### Loads other required libraries #######
+# Loads the igraph Library Package
+require(igraph)
+
 ## Only while session is Intereactive R
 #if (interactive()) {
 
@@ -75,8 +79,6 @@ server <- function(input,output)
   observeEvent(input$startAnalysis,
                {
                  ### Start R Backend Code ###
-                 # Loads the igraph Library Package
-                 require(igraph)
                  
                  # Importing all data files to masters
                  # Imports Edge List

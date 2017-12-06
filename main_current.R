@@ -262,14 +262,6 @@ listgencount <- 1
 
 # Does loop function for each group to output members list
 # Function is under Summary of Variables for Analysis because of print function required
-##### MOVE SECTION TO PRINT SUMMARY SECTION #
-while(listgencount <= maximal_clique_count)
-{
-  listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
-  cat("Nodes in network size: ",listgencount, "\n")
-  print(listpartcount)
-  listgencount = listgencount + 1
-}
 
 # Determines core membranes of the group
 cores <- graph.coreness(g)
@@ -356,8 +348,8 @@ if(export_approval ==1)
   sink(file=paste(project_name, ".txt"), append = FALSE, type = c("output"), split = FALSE)
 }
 #----------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -----------
-cat("University of California, San Diego - Lo Lab Group")
-cat("Social Network Analysis Script Results")
+cat("University of California, San Diego - Lo Lab Group\n")
+cat("Social Network Analysis Script Results\n")
 cat("Summary of Project\n")
 cat("Current Script Engine Version Build: ", scriptversionRead, "\n")
 cat("Summmary of project: ", project_name, "\n")
@@ -401,17 +393,60 @@ cat("\n")
 cat("Network Centrality - Betweeness: \n")
 print(centbtwn)
 cat("\n")
-cat("**********************************************************************************")
-cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE")
+cat("Network Centrality - Articulation Points List: \n")
+print(artpoint)
+cat("\n")
+cat("Subgraphs and Modularity\n")
+cat("Overview of Possible Cliques: \n")
+print(overview_clique_table)
+cat("\n")
+cat("Maximal Cliques Possible: \n")
+print(maximal_clique_table)
+cat("\n")
+# Does loop function for each group to output members list
+# Function is under Summary of Variables for Analysis because of print function required
+cat("Clique Member Lists: \n")
+while(listgencount <= maximal_clique_count)
+{
+  listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
+  cat("Nodes in network size: ",listgencount, "\n")
+  print(listpartcount)
+  listgencount = listgencount + 1
+}
+cat("\n")
+cat("Group Core Members: \n")
+print(cores)
+cat("\n")
+cat("Graph Symmetry of Members: \n")
+print(graph_symet)
+cat("\n")
+cat("Graph Connectedness Census: \n")
+print(g_comps_table)
+cat("\n")
+cat("Neighborhood List for Each Adjacent Node: \n")
+print(neigh_g)
+cat("\n")
+cat("Transitivity/Clustering Coefficients")
+cat({"Measures the probability that the adjacent 
+vertices of a vertex are connected (Based on the number of triangles connected to 
+vertex and triplets centered around vertex)
+  "})
+cat("Local Transitivity values: \n")
+print(g_trans_local)
+cat("Global Transitivity values: \n")
+print(g_trans_global)
+cat("\n")
+cat("**********************************************************************************\n")
+cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE\n")
 cat(
   {"The researcher(s) are primary responsible for the interpretation of the results 
     presented here with the script. The authors accept no liability for any errors that
     may result in the procesing or the interpretation of your results. However, 
     if you do encounter errors in the script that shouldn't have happened, let us know 
-    on our GitHub page"
+    on our GitHub page\n"
     })
-cat("From the Cats at the Lo Lab Group")
-cat("MIT License")
+cat("From the Cats at the Lo Lab Group\n")
+cat("MIT License\n")
 cat("Copyright (c) 2017 Stanley M. Lo, Albert Chai, Joshua P. Le\n")
 cat("\n")
 cat(
@@ -429,7 +464,7 @@ cat(
 copies or substantial portions of the Software.\n"
   }
 )
-cat("n")
+cat("\n")
 cat({
   "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
