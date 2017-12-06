@@ -12,31 +12,31 @@ cat("\014")
 ## R Version Code Check -------------------------------------------------
 # Find exact build and date of version R 3.4.2 and terminate script if version is non-compliant
 # Function checks if the user's R version is compliant with Source Code
-cat('One Moment Please, the cats are determining if your R version is compliant...\n')
-cat('This should be quick...\n')
+#cat('One Moment Please, the cats are determining if your R version is compliant...\n')
+#cat('This should be quick...\n')
 
 # Enter the current R version exactly under 'version.string' after running 'version' in the Console
 # Look for version.string = "R version 3.X.X (20XX-XX-XX)"
 # Current R string for current build: R version 3.4.2 (2017-09-28)
-setRversionread = "R version 3.4.2 (2017-09-28)"
+#setRversionread = "R version 3.4.2 (2017-09-28)"
 
 # Reversion Code Execute Check
-if(R.version$version.string == setRversionread){
-  versionapproval = 1
-}
-if(R.version$version.string != setRversionread){
-  versionapproval = 0
-}
-if(versionapproval == 1){
-  cat('The cats has found that your system is purrrfect...\n')
-  cat('R version code is compliant, script will proceed\n')
-  cat("\n")
-}
-if(versionapproval == 0){
-  cat('The cats are not happy because they found your system is not compliant\n ')
-  cat('R version code is not compliant, script will break\n')
-  stopifnot(versionapproval == 1)
-}
+#if(R.version$version.string == setRversionread){
+#  versionapproval = 1
+#}
+#if(R.version$version.string != setRversionread){
+#  versionapproval = 0
+#}
+#if(versionapproval == 1){
+#  cat('The cats has found that your system is purrrfect...\n')
+#  cat('R version code is compliant, script will proceed\n')
+#  cat("\n")
+#}
+#if(versionapproval == 0){
+#  cat('The cats are not happy because they found your system is not compliant\n ')
+#  cat('R version code is not compliant, script will break\n')
+#  stopifnot(versionapproval == 1)
+#}
 
 ## Introduction --------------------------------------------------------------------
 # UCSD Lo Lab Group Social Network Analysis Script
@@ -270,6 +270,36 @@ centeigen <- centr_eigen(g,directed = userInputdir, scale = TRUE, normalized = T
 
 # Centrality based on Betweenness
 centbtwn <- centralization.betweenness(g, directed = userInputdir, normalized = TRUE)
+
+## Subgraphs and Modularity --------
+# Creates overview of possible cliques in network, Overall Subgraphs of networks
+overview_clique_table <- table(sapply(cliques(g),length))
+
+# Maximal cliques possible
+# Top row is size of cliques and bottom is number of groups of mentioned size
+maximal_clique_table <- table(sapply(maximal.cliques(g), length))
+
+# Generate list members of possible people in subgroup
+# Determines the maximal possible clique count in the dataset
+maximal_clique_count <- maximal.cliques.count(g)
+listgencount <- 1
+
+# Does loop function for each group to output members list
+#while(listgencount <= maximal_clique_count)
+#{
+#  listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
+#  cat("Nodes in network size: ",listpartcount, "\n")
+#  print(listpartcount)
+#}
+
+# Determines core membranes of the group
+cores <- graph.coreness(g)
+
+# Determines symmetry of the group
+# Generates simplified data of graph with no loops or multiple edges
+graph_symet_pre <- simplify(g)
+# Creates list of census of how symmetric the graph is 
+graph_symet <- dyad.census(graph_symet_pre)
 
 ## Summary of Important Variables of Analysis --------------------------------------------------------------------
 # Prompts user that their results are ready for viewing and option to export results as file
