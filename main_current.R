@@ -300,6 +300,20 @@ g_trans_local <- transitivity(g,type = "local")
 # Transitivity of Global values
 g_trans_global <- transitivity(g,type = "global")
 
+######### Graphical Data Statistics ######### 
+#g_network_pkg <- network::as.network(as.matrix(A),directed = TRUE)
+#mystats <- formula(g_network_pkg ~ edges)
+#summary.statistics(mystats)
+#g_network_pkg
+#g.ergm <- formula(g_network_pkg ~ edges + gwesp(log(3),fixed = TRUE))
+#set.seed(42)
+#g.ergm.fit <- ergm(g.ergm)
+#anova.ergm(g.ergm.fit)
+#summary.ergm(g.ergm.fit)
+#gof.g.ergm<- gof(g.ergm.fit)
+#par(mfrow = c(1,3))
+#plot(gof.g.ergm)
+
 ######### Export of Summary of Important Variables of Analysis #########
 # Prompts user that their results are ready for viewing and option to export results as file
 cat("\n")
