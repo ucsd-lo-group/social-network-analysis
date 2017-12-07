@@ -311,18 +311,11 @@ cat("The cats have finished!\n")
 cat("A summary of your analysis is ready for you to review. \n")
 cat("Do you want your results to be automatically exported to a text file? \n")
 export_approval <- readline("Please enter 1 for YES or 0 for NO: \t")
-# Allows user to customize the path and filename of the file, else goes to default settings
-#if(export_approval == 1)
-#{
-#  cat("Do you have a specific directory/filename you want to save your results as?\n")
-#  cat("If you do not specify any name/directory, it will be saved in your document root\n")
-#  cat("as your project name variable\n")
-#  export_approval_nameproj <- readline("Please enter 1 for YES or 0 for NO: \t")
-#  if(export_approval_nameproj == 1)
-#  {
-#    export_project_fullpath <- readline("What is the directory and file name where you want to save your results to?\t")
-#  }
-#}
+
+# Asks the user if they require diagnostic data about their user session
+cat("Do you require diagnostic data about your session. Default is NO.\n")
+diagn_on <- readline("Enter 1 for YES or 0 for NO: \t")
+
 # Prompts the user if they want to clear their console before viewing results
 cat("Do you want your console cleared before showing your results?\n")
 cat("This option is STRONGLY recommended if you want your results exported as a text file.\n")
@@ -339,10 +332,6 @@ cat("***************************************************************************
 # Based on user option for export, console begins printing results to file directly. 
 if(export_approval ==1)
 {
-#  if(export_approval_nameproj == 1)
-#  {
-#    sink(file=export_project_fullpath, append = FALSE, type = c("output"), split = FALSE)
-#  }
   sink(file=paste(project_name, ".txt"), append = FALSE, type = c("output"), split = FALSE)
 }
 #----------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -----------
@@ -489,19 +478,23 @@ cat({
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.\n"
 })
-#Section relates to diagnostic data and information. Only uncomment if needed
-#cat("\n")
-#cat("**********************************************************************************\n")
-#cat("Program Diagnostic Data\n")
-#cat("R Version\n")
-#print(cap_version)
-#cat("\n")
-#cat("Session Info\n")
-#print(sessionInfo())
-#cat("\n")
-#cat("System Information\n")
-#print(Sys.info())
-#cat("\n")
+#Section relates to diagnostic data and information
+if(diagn_on == 1)
+{
+  cat("\n")
+  cat("**********************************************************************************\n")
+  cat("Program Diagnostic Data\n")
+  cat("R Version\n")
+  print(cap_version)
+  cat("\n")
+  cat("Session Info\n")
+  print(sessionInfo())
+  cat("\n")
+  cat("System Information\n")
+  print(Sys.info())
+  cat("\n")
+}
+
 #----------- NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED -----------
 # Turns of console export and returns normal echo back to console
 if(export_approval ==1)
