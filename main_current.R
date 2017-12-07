@@ -252,7 +252,6 @@ maximal_clique_table <- table(sapply(maximal.cliques(g), length))
 # Generate list members of possible people in subgroup
 # Determines the maximal possible clique count in the dataset
 maximal_clique_count <- maximal.cliques.count(g)
-listgencount <- 1
 
 # Does loop function for each group to output members list
 # Function is under Summary of Variables for Analysis because of print function required
@@ -270,6 +269,9 @@ graph_symet <- dyad.census(graph_symet_pre)
 # Example Code
 #g_subden1 <- induced.subgraph(g,neighborhood(g,1,1)[[1]])
 #subgraphdens <- graph.density(g_subden1)
+
+# Generates RAW Cliques List
+rawcliques <- cliques(g)
 
 # Graph Connectedness Census
 g_comps <- decompose.graph(g)
@@ -400,6 +402,7 @@ cat("\n")
 # Does loop function for each group to output members list
 # Function is under Summary of Variables for Analysis because of print function required
 cat("Clique Member Lists: \n")
+listgencount <- 1
 while(listgencount <= maximal_clique_count)
 {
   listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
@@ -420,10 +423,13 @@ cat("\n")
 cat("Neighborhood List for Each Adjacent Node: \n")
 print(neigh_g)
 cat("\n")
-cat("Transitivity/Clustering Coefficients")
+cat("RAW Cliques List: \n")
+print(rawcliques)
+cat("\n")
+cat("Transitivity/Clustering Coefficients\n")
 cat({"Measures the probability that the adjacent 
 vertices of a vertex are connected (Based on the number of triangles connected to 
-vertex and triplets centered around vertex)
+vertex and triplets centered around vertex\n)
   "})
 cat("Local Transitivity values: \n")
 print(g_trans_local)

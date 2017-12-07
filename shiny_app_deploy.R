@@ -79,23 +79,24 @@ server <- function(input,output)
   observeEvent(input$startAnalysis,
                {
                  ### Start R Backend Code ###
-                 
                  # Importing all data files to masters
                  # Imports Edge List
-                 filedata <- reactive({
-                   infile <- input$edgelistImportraw
-                   edgelistimp <- read.csv(infile)
+                 output$edgelistimp <- renderTable({
+                   # input$file1 will be NULL initially. After the user selects
+                   # and uploads a file, it will be a data frame with 'name',
+                   # 'size', 'type', and 'datapath' columns. The 'datapath'
+                   # column will contain the local filenames where the data can
+                   # be found.
+                   inFile <- input$edgelistImportraw
+                   read.csv(inFile$datapath, header = input$globalHeader)
                  })
                  # Imports Weight List
-                # if (graphWeightedset == 1)
-                 {
-                   filedata <- reactive({
-                     infile <- input$weightlistImportraw
-                     weightlistimp <- read.csv(infile)
-                   })
-                 }
-                 #output$edgeImportfile <- 
-                 #output$weightImportfile <-
+                 output$weightlistimp <- renderTable({
+                   if (graphWeightedset == 1){
+                     inFile <- input$weightlistImportraw
+                     read.csv(inFile$datapath, header = input$globalHeader)
+                   }
+                 })
                  
                  # Imports data based on directionality
                  # For no non-participants in network (Normal)
