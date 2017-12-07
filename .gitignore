@@ -10,4 +10,7 @@
 
 # Andrew's stuff
 *.andrew
+
+# R project files
 .Rproj.user
+.Rhistory
