@@ -11,7 +11,7 @@ cat("\014")
 
 ######### Code Version Check #########
 # Sets current script version for Info Print Out
-scriptversionRead <- "0.5.0 - 120617"
+scriptversionRead <- "0.5.1 - 120717"
 # Capture R version system information
 cap_version <- version
 
@@ -20,7 +20,6 @@ cap_version <- version
 # MIT License
 # Written by Albert Chai and Joshua Pei Le
 # Principal Investigator: Stanley M. Lo
-# Current Script Version: 0.4.3-beta-110917
 cat("UCSD Lo Lab Group Social Network Analysis Script\n")
 cat("Written by Albert Chai and Joshua Pei Le\n")
 cat("MIT License\n")
@@ -30,8 +29,9 @@ cat("By using this script, you agree that there is no warranty guaranteed by the
 cat("presented is up to the user for interpretation\n")
 cat("\n")
 cat("INSTRUCTIONS: \n")
+cat("Read each of the following prompts carefully before choosing a selection.\n")
 cat("Your edge lists must be in the following format with one column for 'From' and one column for 'To'.\n")
-cat("The top row is normally ignored because it assumes it as a header, but accepted if processed using the lab's MATLAB script\n")
+cat("You will have the chance to tell R if your data has a header and will import accordingly\n")
 cat("You will also be prompted to decide if your data is directed, weighted, and if self-interactions are allowed\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
@@ -510,6 +510,7 @@ if(export_approval == 1)
 {
   cat("Your results have been exported as ",paste(project_name,".txt"), "\n")
   cat("Check in your Current Working Directory of your console for the exported file \n")
-  cat("The default directory is ~/ \n")
+  cat("The default directory is: ")
+  print(getwd())
   cat("The cats will now go back to purrrring...\n")
 }
