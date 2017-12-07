@@ -11,7 +11,7 @@ cat("\014")
 
 ######### Code Version Check #########
 # Sets current script version for Info Print Out
-scriptversionRead <- "0.4.3-beta-110917"
+scriptversionRead <- "0.5.0 - 120617"
 
 ######### Introduction #########
 # UCSD Lo Lab Group Social Network Analysis Script
@@ -34,15 +34,9 @@ cat("You will also be prompted to decide if your data is directed, weighted, and
 invisible(readline(prompt="Press [enter] to continue\n"))
 
 ######### Checks for Pre-requisite Libraries #########
-# Loads the igraph library package
-cat("Loading the igraph library package\n")
-require(igraph)
-# Loads the network library package
-# cat("Loading the network library package\n")
-# require(network)
-# Loads the SNA library package
-# cat("Loading the sna library package\n")
-# require(sna)
+# Loads external script to check for package dependencies
+cat("Loading dependencies script... The cats are working... \n")
+source('~/r-script-dependencies.R',echo = FALSE)
 
 ######### Data Import and User Input (Information Collection) #########
 # Asks user for a name for the project
@@ -352,7 +346,7 @@ cat("University of California, San Diego - Lo Lab Group\n")
 cat("Social Network Analysis Script Results\n")
 cat("Summary of Project\n")
 cat("Current Script Engine Version Build: ", scriptversionRead, "\n")
-cat("Summmary of project: ", project_name, "\n")
+cat("Name of Project: ", project_name, "\n")
 cat("Current Date and Time: ")
 print(Sys.time())
 cat("\n")
