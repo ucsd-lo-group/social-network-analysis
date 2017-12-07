@@ -29,6 +29,7 @@ cat("By using this script, you agree that there is no warranty guaranteed by the
 cat("presented is up to the user for interpretation\n")
 cat("\n")
 cat("INSTRUCTIONS: \n")
+cat("IMPORTANT: ALL DEPENDENCY FILES FOR THE SCRIPT MUST BE IN THE SAME WORKING DIRECTORY AS THE MAIN SCRIPT IS IN!\n")
 cat("Read each of the following prompts carefully before choosing a selection.\n")
 cat("Your edge lists must be in the following format with one column for 'From' and one column for 'To'.\n")
 cat("You will have the chance to tell R if your data has a header and will import accordingly\n")
@@ -89,9 +90,15 @@ userInputselfinteract <- readline("Please enter 1 for YES or 0 for NO: \t")
 ifelse(userInputselfinteract == 1, self_interact_permission <- "TRUE", self_interact_permission <- "FALSE")
 
 # Creates Graph Adjacency Matrix
-ifelse(userInputweightaccept ==1, graphadj <- as_adjacency_matrix(g, attr = "weight"), graphadj <- as_adjacency_matrix(g))
-ifelse(userInputdir == 1, outcome <- "directed", outcome <- "undirected")
-ifelse(userInputweightaccept == 1, outcome_weight <- "TRUE", outcome_weight <- "FALSE")
+if(userInputweightaccept == 1){
+  graphadj <- as_adjacency_matrix(g, attr = "weight")
+  outcome_weight <- "TRUE"
+}
+if(userInputweightaccept == 0){
+  graphadj <- as_adjacency_matrix(g)
+  outcome_weight <- "FALSE"
+}
+ifelse(userInputdir ==1, outcome <-"directed",outcome <- "undirected")
 graphedadj <- graph.adjacency(graphadj, mode = outcome, weighted = outcome_weight)
 
 # Prompts User to select a graph Projection and prompts for graphing
@@ -142,25 +149,6 @@ if(graph_projection_input == 3)
 {
   graph_layout_input = layout.bipartite
   graph_layout_select = "Bipartite"
-}
-
-# For generating colored nodes based on gender
-# Users must generate an corresponding color list based on corresponding nodes in node order list
-###### WORK IN PROGRESS!!!!!!!! Imported data does not generate corresponding colors.
-requestcolorednodeInput <- readline('Do you want to generate a colored graph, enter 1 for YES or 0 for NO: \t')
-if (requestcolorednodeInput == 1){
-  requestHeaderPrompt <- readline('Does your file have a header? Enter 1 for YES or 0 for NO: \n')
-  ifelse(requestHeaderPrompt == 1, requestHeaderPrompt <- TRUE, requestHeaderPrompt <- FALSE)
-  cat('Before we continue with the script, you must select colors that the program is able to generate\n')
-  cat('You may select from the following colors: \n')
-  cat('URL to igraph color help manual\n')
-  cat('Color1\n')
-  cat('Color2\n')
-  cat('When you are ready to proceed...\n')
-  invisible(readline(prompt="Press [enter] to continue\n"))
-  cat('Awaiting for user selection...\n')
-  importednodecolorData <- read.csv(file.choose(), header = requestHeaderPrompt)
-  V(g)$color <- importednodecolorData
 }
 
 # Creates Plot of Social Network Graph based on selected projection

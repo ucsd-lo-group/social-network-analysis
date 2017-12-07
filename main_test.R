@@ -86,14 +86,7 @@ graph_weighted <- is.weighted(g)
 # Checks if self-interactions in the network are allowed
 cat("Are self-interactions allowed in your network diagram? \n")
 userInputselfinteract <- readline("Please enter 1 for YES or 0 for NO: \t")
-if(userInputselfinteract == 1)
-{
-  self_interact_permission <- "TRUE"
-}
-if (userInputselfinteract == 0)
-{
-  self_interact_permission <- "FALSE"
-}
+ifelse(userInputselfinteract == 1, self_interact_permission <- "TRUE", self_interact_permission <- "FALSE")
 
 # Creates Graph Adjacency Matrix
 if(userInputweightaccept == 1){
@@ -156,6 +149,25 @@ if(graph_projection_input == 3)
   graph_layout_input = layout.bipartite
   graph_layout_select = "Bipartite"
 }
+
+# For generating colored nodes based on gender
+# Users must generate an corresponding color list based on corresponding nodes in node order list
+###### WORK IN PROGRESS!!!!!!!! Imported data does not generate corresponding colors.
+#requestcolorednodeInput <- readline('Do you want to generate a colored graph, enter 1 for YES or 0 for NO: \t')
+#if (requestcolorednodeInput == 1){
+#  requestHeaderPrompt <- readline('Does your file have a header? Enter 1 for YES or 0 for NO: \n')
+#  ifelse(requestHeaderPrompt == 1, requestHeaderPrompt <- TRUE, requestHeaderPrompt <- FALSE)
+#  cat('Before we continue with the script, you must select colors that the program is able to generate\n')
+#  cat('You may select from the following colors: \n')
+#  cat('URL to igraph color help manual\n')
+#  cat('Color1\n')
+#  cat('Color2\n')
+#  cat('When you are ready to proceed...\n')
+#  invisible(readline(prompt="Press [enter] to continue\n"))
+#  cat('Awaiting for user selection...\n')
+#  importednodecolorData <- read.csv(file.choose(), header = requestHeaderPrompt)
+#  V(g)$color <- importednodecolorData
+#}
 
 # Creates Plot of Social Network Graph based on selected projection
 plot_raw <- plot(graphedadj, layout = graph_layout_input, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
