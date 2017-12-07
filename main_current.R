@@ -12,6 +12,8 @@ cat("\014")
 ######### Code Version Check #########
 # Sets current script version for Info Print Out
 scriptversionRead <- "0.5.0 - 120617"
+# Capture R version system information
+cap_version <- version
 
 ######### Introduction #########
 # UCSD Lo Lab Group Social Network Analysis Script
@@ -289,18 +291,18 @@ g_trans_local <- transitivity(g,type = "local")
 g_trans_global <- transitivity(g,type = "global")
 
 ######### Graphical Data Statistics ######### 
-#g_network_pkg <- network::as.network(as.matrix(A),directed = TRUE)
-#mystats <- formula(g_network_pkg ~ edges)
-#summary.statistics(mystats)
-#g_network_pkg
-#g.ergm <- formula(g_network_pkg ~ edges + gwesp(log(3),fixed = TRUE))
-#set.seed(42)
-#g.ergm.fit <- ergm(g.ergm)
-#anova.ergm(g.ergm.fit)
-#summary.ergm(g.ergm.fit)
-#gof.g.ergm<- gof(g.ergm.fit)
-#par(mfrow = c(1,3))
-#plot(gof.g.ergm)
+A<-get.adjacency(g)
+g_network_pkg <- network::as.network(as.matrix(A),directed = TRUE)
+mystats <- formula(g_network_pkg ~ edges)
+sum_stats <- summary.statistics(mystats)
+g.ergm <- formula(g_network_pkg ~ edges + gwesp(log(3),fixed = TRUE))
+set.seed(42)
+g.ergm.fit <- ergm(g.ergm)
+anova_stat <- anova.ergm(g.ergm.fit)
+sum_ergm <- summary.ergm(g.ergm.fit)
+gof.g.ergm<- gof(g.ergm.fit)
+par(mfrow = c(1,3))
+plot(gof.g.ergm)
 
 ######### Export of Summary of Important Variables of Analysis #########
 # Prompts user that their results are ready for viewing and option to export results as file
@@ -436,6 +438,19 @@ print(g_trans_local)
 cat("Global Transitivity values: \n")
 print(g_trans_global)
 cat("\n")
+cat("Graphical Statistical Analysis\n")
+cat("Summary Statistics: \n")
+print(sum_stats)
+cat("\n")
+cat("Network Summary: \n")
+print(g_network_pkg)
+cat("\n")
+cat("ANOVA Analysis\n")
+print(anova_stat)
+cat("\n")
+cat("Summary of ergm Analysis")
+print(sum_ergm)
+cat("\n")
 cat("**********************************************************************************\n")
 cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE\n")
 cat(
@@ -474,6 +489,19 @@ cat({
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.\n"
 })
+#Section relates to diagnostic data and information. Only uncomment if needed
+#cat("\n")
+#cat("**********************************************************************************\n")
+#cat("Program Diagnostic Data\n")
+#cat("R Version\n")
+#print(cap_version)
+#cat("\n")
+#cat("Session Info\n")
+#print(sessionInfo())
+#cat("\n")
+#cat("System Information\n")
+#print(Sys.info())
+#cat("\n")
 #----------- NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED -----------
 # Turns of console export and returns normal echo back to console
 if(export_approval ==1)
