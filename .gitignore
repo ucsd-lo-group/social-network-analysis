@@ -12,6 +12,6 @@
 *.andrew
 
 # R project files
-.Rproj.user
-.Rhistory
-.Rproj
+*.Rproj.user
+*.Rhistory
+*.Rproj
