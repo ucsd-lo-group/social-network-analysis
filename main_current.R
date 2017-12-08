@@ -38,7 +38,6 @@ invisible(readline(prompt="Press [enter] to continue\n"))
 
 ######### Checks for Pre-requisite Libraries #########
 # Loads external script to check for package dependencies
-cat("Loading dependencies script... The cats are working... \n")
 source('r-script-dependencies.R',echo = FALSE)
 
 ######### Data Import and User Input (Information Collection) #########
@@ -232,6 +231,10 @@ centbtwn <- centralization.betweenness(g, directed = userInputdir, normalized = 
 artpoint <- articulation.points(g)
 
 ######### Subgraphs and Modularity #########
+# Section only executes if there is a subgroup present detected by max_clique check
+pre_check_clique_pres <- count_max_cliques(g)
+if(pre_check_clique_pres >=2)
+{
 # Creates overview of possible cliques in network, Overall Subgraphs of networks
 overview_clique_table <- table(sapply(cliques(g),length))
 
@@ -291,6 +294,9 @@ sum_ergm <- summary.ergm(g.ergm.fit)
 gof.g.ergm<- gof(g.ergm.fit)
 par(mfrow = c(1,3))
 plot(gof.g.ergm)
+
+} 
+# End of subgroups reporting section
 
 ######### Export of Summary of Important Variables of Analysis #########
 # Prompts user that their results are ready for viewing and option to export results as file
@@ -371,6 +377,8 @@ cat("\n")
 cat("Network Centrality - Articulation Points List: \n")
 print(artpoint)
 cat("\n")
+if(pre_check_clique_pres >=2)
+{
 cat("Subgraphs and Modularity\n")
 cat("Overview of Possible Cliques: \n")
 print(overview_clique_table)
@@ -428,6 +436,7 @@ cat("\n")
 cat("Summary of ergm Analysis")
 print(sum_ergm)
 cat("\n")
+}
 cat("**********************************************************************************\n")
 cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE\n")
 cat(

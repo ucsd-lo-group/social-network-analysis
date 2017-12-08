@@ -1,6 +1,9 @@
 # Install Dependencies
 # Installs required packages before executing the main program
 
+# Notifies user the dependency script is running
+cat("Loading dependencies script... The cats are working... \n")
+
 # Checks if required libraries are installed
 check_sna_install <- require('sna')
 check_network_install <- require('network')
@@ -41,4 +44,8 @@ if(check_igraph_install==FALSE || check_ergm_install == FALSE || check_sna_insta
 {
   cat("The script will run into an error if one of these dependencies failed to install.\n")
   cat("Please check your system settings and try running the dependencies installer again. \n")
+}
+if(check_igraph_install==TRUE && check_ergm_install == TRUE && check_sna_install == TRUE && check_network_install == TRUE && check_statnet_install == TRUE)
+{
+  cat("The necessary libraries have been installed... The script will continue.\n")
 }
