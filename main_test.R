@@ -219,6 +219,22 @@ strwkplotchk <- clusters(g, mode = "strong")$membership
 # Creates a vector based on short walkthroughs to find communities
 membershipvec <- cluster_walktrap(g)
 
+# Generates similarity matrix for members in network
+sim_graph <- similarity(g)
+# ADD TO PRINT SECTION print(sim_graph)
+
+# Recriprocity score of network members
+# Scale is from 0 to 1
+recp_network <- reciprocity(g)
+# ADD TO PRINT SECTION cat(recp_network)
+
+# Calculates Burt's Constraint values for network members
+# Lower values are more preferred than higher ones
+# From help page: Burt's constraint is higher if ego has less, or mutually stronger related 
+#(i.e. more redundant) contacts
+const_net <- constraint(g)
+# ADD TO PRINT SECTION print(const_net)
+
 # Finds unrestricted modularity of graph
 submod <- modularity(membershipvec)
 
