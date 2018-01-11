@@ -62,7 +62,7 @@ ifelse(userInputdir == 1, outcomeBool <- "TRUE", outcomeBool <- "FALSE")
 g <- graph.data.frame(importedData, directed = outcomeBool)
 
 # Asks user if there is a weight for the imported data list
-userInputweightaccept <- readline("Do you have a weighted list (in a separate file)? Please enter 1 for YES or 0 for NO: \t")
+userInputweightaccept <- readline("Do you have a weighted list? Please enter 1 for YES or 0 for NO: \t")
 # Based on user prompt, script will ask user to select file for list
 
 # If user states that there is no weighted list, then script will skip all Weighted sections
