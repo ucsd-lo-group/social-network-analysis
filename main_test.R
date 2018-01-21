@@ -9,6 +9,12 @@ rm(list=ls())
 # Clears R Console
 cat("\014")
 
+######### Set Workspace Working Directory #########
+cat('Please indicate the working directory of the social network analysis files')
+cat("Format: ~/path/to/social-network-analysis\n")
+setwdvar <- readline('Working Directory of Script files: ')
+setwd(setwdvar)
+
 ######### Code Version Check #########
 # Sets current script version for Info Print Out
 scriptversionRead <- "0.5.1 - 120717"
