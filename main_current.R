@@ -493,7 +493,7 @@ if(diagn_on == 1)
 }
 
 #----------- NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED -----------
-# Turns of console export and returns normal echo back to console
+# Turns off console export and returns normal echo back to console
 if(export_approval ==1)
 {
   sink()
