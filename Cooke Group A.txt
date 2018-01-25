@@ -1,0 +1,306 @@
+
+> #----------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -----------
+> cat("University of California, San Diego - Lo Lab Group\n")
+University of California, San Diego - Lo Lab Group
+
+> cat("Social Network Analysis Script Results\n")
+Social Network Analysis Script Results
+
+> cat("Summary of Project\n")
+Summary of Project
+
+> cat("Current Script Engine Version Build: ", scriptversionRead, "\n")
+Current Script Engine Version Build:  0.5.1 - 120717 
+
+> cat("Name of Project: ", project_name, "\n")
+Name of Project:  Cooke Group A 
+
+> cat("Current Date and Time: ")
+Current Date and Time: 
+> print(Sys.time())
+[1] "2018-01-25 04:03:08 GMT"
+
+> cat("\n")
+
+
+> cat("Weighted Graph: ", graph_weighted, "\n")
+Weighted Graph:  TRUE 
+
+> cat("Self-Interactions Allowed: ", self_interact_permission, "\n")
+Self-Interactions Allowed:  FALSE 
+
+> cat("Number of Nodes: ", nnode, "\n")
+Number of Nodes:  4 
+
+> cat("Number of Edges: ", nedge, "\n")
+Number of Edges:  12 
+
+> if(userInputweightaccept==1)
++ {
++   cat("Weighted Edges: ",nedge_weighted, "\n")
++ }
+Weighted Edges:  141 
+
+> cat("Graph Directed: ", outcome, "\n")
+Graph Directed:  directed 
+
+> cat("Network Density: ", den, "\n")
+Network Density:  1 
+
+> cat("Network Diameter (Longest): ", diam_longest, "\n")
+Network Diameter (Longest):  13 
+
+> cat("Network Diameter (All Short Possible): \n")
+Network Diameter (All Short Possible): 
+
+> print(get_graph_diameter)
++ 3/4 vertices, named:
+[1] 1 2 3
+
+> cat("***Please note that this result returns a path with the actual diameter.\n")
+***Please note that this result returns a path with the actual diameter.
+
+> cat("***If there are many shortest paths of the length of the diameter, then it returns the first one found.\n")
+***If there are many shortest paths of the length of the diameter, then it returns the first one found.
+
+> cat("Average Degree: ", degavg, "\n")
+Average Degree:  3 
+
+> cat("Average Path Length: ", avg_path, "\n")
+Average Path Length:  1 
+
+> cat("Unrestricted Modularity: ", submod, "\n")
+Unrestricted Modularity:  0 
+
+> if(graphrequest_approval == 1)
++ {
++   cat("Graph Projection Used: ", graph_layout_select, "\n")
++ }
+Graph Projection Used:  Fruchterman Reingold 
+
+> cat("Graph Adjency Matrix: \n")
+Graph Adjency Matrix: 
+
+> print(graphadj)
+4 x 4 sparse Matrix of class "dgCMatrix"
+   1  2  3  4
+1  .  2 31  8
+2  3  . 11  3
+3 37 13  . 11
+4  2  2 18  .
+
+> cat("\n")
+
+
+> cat("Strong/Weak Interactions: \n")
+Strong/Weak Interactions: 
+
+> print(strwkplotchk)
+1 2 3 4 
+1 1 1 1 
+
+> cat("\n")
+
+
+> cat("Network Centrality: \n")
+Network Centrality: 
+
+> print(central)
+$res
+[1] 6 6 6 6
+
+$centralization
+[1] 0
+
+$theoretical_max
+[1] 12
+
+
+> cat("\n")
+
+
+> cat("Network Centrality - Eigenvector: \n")
+Network Centrality - Eigenvector: 
+
+> print(centeigen)
+$vector
+[1] 1 1 1 1
+
+$value
+[1] 3
+
+$options
+$options$bmat
+[1] "I"
+
+$options$n
+[1] 4
+
+$options$which
+[1] "LR"
+
+$options$nev
+[1] 1
+
+$options$tol
+[1] 0
+
+$options$ncv
+[1] 0
+
+$options$ldv
+[1] 0
+
+$options$ishift
+[1] 1
+
+$options$maxiter
+[1] 1000
+
+$options$nb
+[1] 1
+
+$options$mode
+[1] 1
+
+$options$start
+[1] 1
+
+$options$sigma
+[1] 0
+
+$options$sigmai
+[1] 0
+
+$options$info
+[1] 0
+
+$options$iter
+[1] 1
+
+$options$nconv
+[1] 1
+
+$options$numop
+[1] 3
+
+$options$numopb
+[1] 0
+
+$options$numreo
+[1] 3
+
+
+$centralization
+[1] 1.480297e-16
+
+$theoretical_max
+[1] 3
+
+
+> cat("\n")
+
+
+> cat("Network Centrality - Betweeness: \n")
+Network Centrality - Betweeness: 
+
+> print(centbtwn)
+$res
+[1] 0 0 0 0
+
+$centralization
+[1] 0
+
+$theoretical_max
+[1] 18
+
+
+> cat("\n")
+
+
+> cat("Network Centrality - Articulation Points List: \n")
+Network Centrality - Articulation Points List: 
+
+> print(artpoint)
++ 0/4 vertices, named:
+
+> cat("\n")
+
+
+> if(pre_check_clique_pres >=2)
++ {
++ cat("Subgraphs and Modularity\n")
++ cat("Overview of Possible Cliques: \n")
++ print(overview_clique_table)
++ cat .... [TRUNCATED] 
+
+> cat("**********************************************************************************\n")
+**********************************************************************************
+
+> cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE\n")
+DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE
+
+> cat(
++   {"The researcher(s) are primary responsible for the interpretation of the results 
++     presented here with the script. The authors accept ..." ... [TRUNCATED] 
+The researcher(s) are primary responsible for the interpretation of the results 
+    presented here with the script. The authors accept no liability for any errors that
+    may result in the procesing or the interpretation of your results. However, 
+    if you do encounter errors in the script that shouldn't have happened, let us know 
+    on our GitHub page
+
+> cat("From the Cats at the Lo Lab Group\n")
+From the Cats at the Lo Lab Group
+
+> cat("MIT License\n")
+MIT License
+
+> cat("Copyright (c) 2017 Stanley M. Lo, Albert Chai, Joshua P. Le\n")
+Copyright (c) 2017 Stanley M. Lo, Albert Chai, Joshua P. Le
+
+> cat("\n")
+
+
+> cat(
++ {"Permission is hereby granted, free of charge, to any person obtaining a copy
++ of this software and associated documentation files (the 'So ..." ... [TRUNCATED] 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the 'Software'), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+
+> cat("\n")
+
+
+> cat(
++   {"The above copyright notice and this permission notice shall be included in all
++ copies or substantial portions of the Software.\n"
++   } .... [TRUNCATED] 
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+> cat("\n")
+
+
+> cat({
++   "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF ME ..." ... [TRUNCATED] 
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+> #Section relates to diagnostic data and information
+> if(diagn_on == 1)
++ {
++   cat("\n")
++   cat("************************************************* ..." ... [TRUNCATED] 
+
+> #----------- NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED -----------
+> # Turns off console export and returns normal .... [TRUNCATED] 
