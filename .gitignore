@@ -15,5 +15,5 @@
 *.Rproj.user
 *.Rhistory
 *.Rproj
-.Rproj.user
-.RData
+*.Rproj.user
+*.RData
