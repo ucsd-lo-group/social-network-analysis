@@ -10,14 +10,18 @@ rm(list=ls())
 cat("\014")
 
 ######### Set Workspace Working Directory #########
-cat('Please indicate the working directory of the social network analysis files')
-cat("Format: ~/path/to/social-network-analysis\n")
-setwdvar <- readline('Working Directory of Script files: ')
-setwd(setwdvar)
+checkwdset <- readline('Is your working directory set to the correct directory with all dependent files? 1 for YES or 0 for NO: ')
+if(checkwdset == 0) #If user indicates setwd is not correct, prompts user to change wd to correct location
+{
+  cat('Please indicate the working directory of the social network analysis files')
+  cat("Format: ~/path/to/social-network-analysis\n")
+  setwdvar <- readline('Working Directory of Script files: ')
+  setwd(setwdvar)
+}
 
 ######### Code Version Check #########
 # Sets current script version for Info Print Out
-scriptversionRead <- "0.5.1 - 120717"
+scriptversionRead <- "0.5.2-beta-012818"
 # Capture R version system information
 cap_version <- version
 
