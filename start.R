@@ -9,4 +9,4 @@ if(checkwdset == 0) #If user indicates setwd is not correct, prompts user to cha
 }
 
 ######### Disables ECHO for all scripts, run for clean interface #########
-source('source.R',echo = FALSE)
+source('dependencies/source.R',echo = FALSE)

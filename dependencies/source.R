@@ -38,7 +38,7 @@ invisible(readline(prompt="Press [enter] to continue\n"))
 
 ######### Checks for Pre-requisite Libraries #########
 # Loads external script to check for package dependencies
-source('dependencies.R',echo = FALSE)
+source('dependencies/libraries.R',echo = FALSE)
 
 ######### Data Import and User Input (Information Collection) #########
 # Asks user for a name for the project
