@@ -359,7 +359,7 @@ if(graphrequest_approval == 1)
 {
   cat("Graph Projection Used: ", graph_layout_select, "\n")
 }
-cat("Graph Adjency Matrix: \n")
+cat("Graph Adjacency Matrix: \n")
 print(graphadj)
 cat("\n")
 cat("Strong/Weak Interactions: \n")
