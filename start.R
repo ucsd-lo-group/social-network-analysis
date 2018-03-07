@@ -1,12 +1,36 @@
-######### Set Workspace Working Directory #########
-checkwdset <- readline('Is your working directory set to the correct directory with all dependent files? 1 for YES or 0 for NO: ')
-if(checkwdset == 0) #If user indicates setwd is not correct, prompts user to change wd to correct location
+# Start R script
+# Set working directory and execute based on dependencies file
+
+# Code Version Check
+# Sets current script version for Info Print Out
+scriptversionRead <- "2.0-030618"
+# Capture R version system information
+cap_version <- version
+
+# Introduction
+# UCSD Lo Lab Group Social Network Analysis Script
+# MIT License
+# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Principal Investigator: Stanley M. Lo
+cat("UCSD Lo Lab Group Social Network Analysis Script\n")
+cat("Written by Albert Chai, Joshua P.Le, and Andrew S. Lee\n")
+cat("MIT License\n")
+cat("Current Script Engine Version Build: ", scriptversionRead)
+cat("\n")
+cat("Please read the man pages on the GitHub Repository for more instructions")
+invisible(readline(prompt="Press [enter] to continue\n"))
+
+# Check Workspace if used before
+checkwksp <- readline('Are you using data from a previous script session? [1 for yes/0 for no]\t')
+if(checkwksp == 0)
 {
-  cat('Please indicate the working directory of the social network analysis files')
-  cat("Format: ~/path/to/social-network-analysis\n")
-  setwdvar <- readline('Working Directory of Script files: ')
-  setwd(setwdvar)
+  # Initialize Loader Variables
+  datacollect <- 0
+  core <- 0
+  subgroups <- 0
+  stats <- 0
 }
 
-######### Disables ECHO for all scripts, run for clean interface #########
-source('dependencies/source.R',echo = FALSE)
+# Checks for Pre-requisite Libraries
+# Loads external script to check for package dependencies
+source('dependencies/libraries.R',echo = FALSE)

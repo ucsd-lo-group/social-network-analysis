@@ -122,37 +122,37 @@ if(userInputselfinteract == 0)
 }
 if(graphrequest_approval == 1)
 {
-cat("Please select your graph projection that you want to plot. Options include: \n")
-cat("Fruchterman Reingold = 0 (Default)\n")
-cat("Kamada Kawai = 1\n")
-cat("Reingold Tilfold = 2\n")
-cat("Bipartite = 3\n")
-cat("Awaiting for user selection... \n")
-graph_projection_input <- readline("Selection:  \t")
-if(graph_projection_input == 0)
-{
-  graph_layout_input = layout.fruchterman.reingold
-  graph_layout_select = "Fruchterman Reingold"
-}
-if(graph_projection_input == 1)
-{
-  graph_layout_input = layout.kamada.kawai
-  graph_layout_select = "Kamada Kawai"
-}
-if(graph_projection_input == 2)
-{
-  graph_layout_input = layout.reingold.tilford
-  graph_layout_select = "Reingold Tilford"
-}
-if(graph_projection_input == 3)
-{
-  graph_layout_input = layout.bipartite
-  graph_layout_select = "Bipartite"
-}
-
-# Creates Plot of Social Network Graph based on selected projection
-plot_raw <- plot(graphedadj, layout = graph_layout_input, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
-title(project_name)
+  cat("Please select your graph projection that you want to plot. Options include: \n")
+  cat("Fruchterman Reingold = 0 (Default)\n")
+  cat("Kamada Kawai = 1\n")
+  cat("Reingold Tilfold = 2\n")
+  cat("Bipartite = 3\n")
+  cat("Awaiting for user selection... \n")
+  graph_projection_input <- readline("Selection:  \t")
+  if(graph_projection_input == 0)
+  {
+    graph_layout_input = layout.fruchterman.reingold
+    graph_layout_select = "Fruchterman Reingold"
+  }
+  if(graph_projection_input == 1)
+  {
+    graph_layout_input = layout.kamada.kawai
+    graph_layout_select = "Kamada Kawai"
+  }
+  if(graph_projection_input == 2)
+  {
+    graph_layout_input = layout.reingold.tilford
+    graph_layout_select = "Reingold Tilford"
+  }
+  if(graph_projection_input == 3)
+  {
+    graph_layout_input = layout.bipartite
+    graph_layout_select = "Bipartite"
+  }
+  
+  # Creates Plot of Social Network Graph based on selected projection
+  plot_raw <- plot(graphedadj, layout = graph_layout_input, edge.width =E(g)$weight, edge.color = "black", edge.curved = FALSE)
+  title(project_name)
 }
 
 # Progress Check cat Call
@@ -208,9 +208,9 @@ submod <- modularity(membershipvec)
 if(userInputdir == 0)
 {
   if(userInputweightaccept==1)
-    {
+  {
     relsubmod <- modularity(g, membership(membershipvec), weights = g_weight)
-    }
+  }
   relsubmod <- modularity(g, membership(membershipvec))
 }
 
@@ -235,66 +235,66 @@ artpoint <- articulation.points(g)
 pre_check_clique_pres <- count_max_cliques(g)
 if(pre_check_clique_pres >=2)
 {
-# Creates overview of possible cliques in network, Overall Subgraphs of networks
-overview_clique_table <- table(sapply(cliques(g),length))
-
-# Maximal cliques possible
-# Top row is size of cliques and bottom is number of groups of mentioned size
-maximal_clique_table <- table(sapply(maximal.cliques(g), length))
-
-# Generate list members of possible people in subgroup
-# Determines the maximal possible clique count in the dataset
-maximal_clique_count <- maximal.cliques.count(g)
-
-# Does loop function for each group to output members list
-# Function is under Summary of Variables for Analysis because of print function required
-
-# Determines core membranes of the group
-cores <- graph.coreness(g)
-
-# Determines symmetry of the group
-# Generates simplified data of graph with no loops or multiple edges
-graph_symet_pre <- simplify(g)
-# Creates list of census of how symmetric the graph is 
-graph_symet <- dyad.census(graph_symet_pre)
-
-# Generates density of each of the relative subgroups found
-# Example Code
-#g_subden1 <- induced.subgraph(g,neighborhood(g,1,1)[[1]])
-#subgraphdens <- graph.density(g_subden1)
-
-# Generates RAW Cliques List
-rawcliques <- cliques(g)
-
-# Graph Connectedness Census
-g_comps <- decompose.graph(g)
-g_comps_table <- table(sapply(g_comps,vcount))
-
-# Generates a list the neighborhood of each of the nodes adjacent to one another
-neigh_g <- neighborhood(g)
-
-# Transitivity/Clustering Coefficients 
-# Measures the probability that the adjacent vertices of a vertex are connected
-#(Based on the number of triangles connected to vertex and triplets centered around vertex)
-# Transitivity of Local values
-g_trans_local <- transitivity(g,type = "local")
-# Transitivity of Global values
-g_trans_global <- transitivity(g,type = "global")
-
-######### Graphical Data Statistics ######### 
-A<-get.adjacency(g)
-g_network_pkg <- network::as.network(as.matrix(A),directed = TRUE)
-mystats <- formula(g_network_pkg ~ edges)
-sum_stats <- summary.statistics(mystats)
-g.ergm <- formula(g_network_pkg ~ edges + gwesp(log(3),fixed = TRUE))
-set.seed(42)
-g.ergm.fit <- ergm(g.ergm)
-anova_stat <- anova.ergm(g.ergm.fit)
-sum_ergm <- summary.ergm(g.ergm.fit)
-gof.g.ergm<- gof(g.ergm.fit)
-par(mfrow = c(1,3))
-plot(gof.g.ergm)
-
+  # Creates overview of possible cliques in network, Overall Subgraphs of networks
+  overview_clique_table <- table(sapply(cliques(g),length))
+  
+  # Maximal cliques possible
+  # Top row is size of cliques and bottom is number of groups of mentioned size
+  maximal_clique_table <- table(sapply(maximal.cliques(g), length))
+  
+  # Generate list members of possible people in subgroup
+  # Determines the maximal possible clique count in the dataset
+  maximal_clique_count <- maximal.cliques.count(g)
+  
+  # Does loop function for each group to output members list
+  # Function is under Summary of Variables for Analysis because of print function required
+  
+  # Determines core membranes of the group
+  cores <- graph.coreness(g)
+  
+  # Determines symmetry of the group
+  # Generates simplified data of graph with no loops or multiple edges
+  graph_symet_pre <- simplify(g)
+  # Creates list of census of how symmetric the graph is 
+  graph_symet <- dyad.census(graph_symet_pre)
+  
+  # Generates density of each of the relative subgroups found
+  # Example Code
+  #g_subden1 <- induced.subgraph(g,neighborhood(g,1,1)[[1]])
+  #subgraphdens <- graph.density(g_subden1)
+  
+  # Generates RAW Cliques List
+  rawcliques <- cliques(g)
+  
+  # Graph Connectedness Census
+  g_comps <- decompose.graph(g)
+  g_comps_table <- table(sapply(g_comps,vcount))
+  
+  # Generates a list the neighborhood of each of the nodes adjacent to one another
+  neigh_g <- neighborhood(g)
+  
+  # Transitivity/Clustering Coefficients 
+  # Measures the probability that the adjacent vertices of a vertex are connected
+  #(Based on the number of triangles connected to vertex and triplets centered around vertex)
+  # Transitivity of Local values
+  g_trans_local <- transitivity(g,type = "local")
+  # Transitivity of Global values
+  g_trans_global <- transitivity(g,type = "global")
+  
+  ######### Graphical Data Statistics ######### 
+  A<-get.adjacency(g)
+  g_network_pkg <- network::as.network(as.matrix(A),directed = TRUE)
+  mystats <- formula(g_network_pkg ~ edges)
+  sum_stats <- summary.statistics(mystats)
+  g.ergm <- formula(g_network_pkg ~ edges + gwesp(log(3),fixed = TRUE))
+  set.seed(42)
+  g.ergm.fit <- ergm(g.ergm)
+  anova_stat <- anova.ergm(g.ergm.fit)
+  sum_ergm <- summary.ergm(g.ergm.fit)
+  gof.g.ergm<- gof(g.ergm.fit)
+  par(mfrow = c(1,3))
+  plot(gof.g.ergm)
+  
 } 
 # End of subgroups reporting section
 
@@ -379,64 +379,64 @@ print(artpoint)
 cat("\n")
 if(pre_check_clique_pres >=2)
 {
-cat("Subgraphs and Modularity\n")
-cat("Overview of Possible Cliques: \n")
-print(overview_clique_table)
-cat("\n")
-cat("Maximal Cliques Possible: \n")
-print(maximal_clique_table)
-cat("\n")
-# Does loop function for each group to output members list
-# Function is under Summary of Variables for Analysis because of print function required
-cat("Clique Member Lists: \n")
-listgencount <- 1
-while(listgencount <= maximal_clique_count)
-{
-  listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
-  cat("Nodes in network size: ",listgencount, "\n")
-  print(listpartcount)
-  listgencount = listgencount + 1
-}
-cat("\n")
-cat("Group Core Members: \n")
-print(cores)
-cat("\n")
-cat("Graph Symmetry of Members: \n")
-print(graph_symet)
-cat("\n")
-cat("Graph Connectedness Census: \n")
-print(g_comps_table)
-cat("\n")
-cat("Neighborhood List for Each Adjacent Node: \n")
-print(neigh_g)
-cat("\n")
-cat("RAW Cliques List: \n")
-print(rawcliques)
-cat("\n")
-cat("Transitivity/Clustering Coefficients\n")
-cat({"Measures the probability that the adjacent 
-vertices of a vertex are connected (Based on the number of triangles connected to 
-vertex and triplets centered around vertex\n)
-  "})
-cat("Local Transitivity values: \n")
-print(g_trans_local)
-cat("Global Transitivity values: \n")
-print(g_trans_global)
-cat("\n")
-cat("Graphical Statistical Analysis\n")
-cat("Summary Statistics: \n")
-print(sum_stats)
-cat("\n")
-cat("Network Summary: \n")
-print(g_network_pkg)
-cat("\n")
-cat("ANOVA Analysis\n")
-print(anova_stat)
-cat("\n")
-cat("Summary of ergm Analysis")
-print(sum_ergm)
-cat("\n")
-}
+  cat("Subgraphs and Modularity\n")
+  cat("Overview of Possible Cliques: \n")
+  print(overview_clique_table)
+  cat("\n")
+  cat("Maximal Cliques Possible: \n")
+  print(maximal_clique_table)
+  cat("\n")
+  # Does loop function for each group to output members list
+  # Function is under Summary of Variables for Analysis because of print function required
+  cat("Clique Member Lists: \n")
+  listgencount <- 1
+  while(listgencount <= maximal_clique_count)
+  {
+    listpartcount <- cliques(g)[sapply(cliques(g),length)==listgencount]
+    cat("Nodes in network size: ",listgencount, "\n")
+    print(listpartcount)
+    listgencount = listgencount + 1
+  }
+  cat("\n")
+  cat("Group Core Members: \n")
+  print(cores)
+  cat("\n")
+  cat("Graph Symmetry of Members: \n")
+  print(graph_symet)
+  cat("\n")
+  cat("Graph Connectedness Census: \n")
+  print(g_comps_table)
+  cat("\n")
+  cat("Neighborhood List for Each Adjacent Node: \n")
+  print(neigh_g)
+  cat("\n")
+  cat("RAW Cliques List: \n")
+  print(rawcliques)
+  cat("\n")
+  cat("Transitivity/Clustering Coefficients\n")
+  cat({"Measures the probability that the adjacent 
+    vertices of a vertex are connected (Based on the number of triangles connected to 
+    vertex and triplets centered around vertex\n)
+    "})
+  cat("Local Transitivity values: \n")
+  print(g_trans_local)
+  cat("Global Transitivity values: \n")
+  print(g_trans_global)
+  cat("\n")
+  cat("Graphical Statistical Analysis\n")
+  cat("Summary Statistics: \n")
+  print(sum_stats)
+  cat("\n")
+  cat("Network Summary: \n")
+  print(g_network_pkg)
+  cat("\n")
+  cat("ANOVA Analysis\n")
+  print(anova_stat)
+  cat("\n")
+  cat("Summary of ergm Analysis")
+  print(sum_ergm)
+  cat("\n")
+  }
 cat("**********************************************************************************\n")
 cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE\n")
 cat(
@@ -445,24 +445,24 @@ cat(
     may result in the procesing or the interpretation of your results. However, 
     if you do encounter errors in the script that shouldn't have happened, let us know 
     on our GitHub page\n"
-    })
+  })
 cat("From the Cats at the Lo Lab Group\n")
 cat("MIT License\n")
 cat("Copyright (c) 2017 Stanley M. Lo, Albert Chai, Joshua P. Le\n")
 cat("\n")
 cat(
-{"Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the 'Software'), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-\n"
+  {"Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the 'Software'), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    \n"
   })
 cat("\n")
 cat(
   {"The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.\n"
+    copies or substantial portions of the Software.\n"
   }
 )
 cat("\n")
