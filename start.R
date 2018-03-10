@@ -17,7 +17,7 @@ cat("Written by Albert Chai, Joshua P.Le, and Andrew S. Lee\n")
 cat("MIT License\n")
 cat("Current Script Engine Version Build: ", scriptversionRead)
 cat("\n")
-cat("Please read the man pages on the GitHub Repository for more instructions")
+cat("Please read the man pages on the GitHub Repository for more instructions\n")
 invisible(readline(prompt="Press [enter] to continue\n"))
 
 # Check Workspace if used before

@@ -128,6 +128,28 @@ if(pre_check_clique_pres >=2)
   cat("\n")
 #  cat("Graphical Statistical Analysis\n")
 # to be revised
+  if(userInputdir == 0){
+    cat('formula(Ag~edges)')
+    print(summary(Ag.formula.01))
+    print(summary(Ag.model.01))
+    print(summary(Ag.gof.01))
+    print(summary(Ag.gof.01.global))
+    cat('\n')
+    cat('formula(Ag~edges + triangles)')
+    print(summary(Ag.formula.02))
+    print(summary(Ag.model.02))
+    print(summary(Ag.gof.02))
+    print(summary(Ag.gof.02.global))
+    cat('\n')
+  }
+  if(userInputdir == 1){
+    cat('formula(Ag~edges + mutual)')
+    print(summary(Ag.formula.03))
+    print(summary(Ag.model.03))
+    print(summary(Ag.gof.03))
+    print(summary(Ag.gof.03.global))
+    cat('\n')
+  }
   }
 cat("**********************************************************************************\n")
 cat("DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE\n")
