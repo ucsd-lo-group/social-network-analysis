@@ -1,3 +1,9 @@
+# Code Version Check
+# Sets current script version for Info Print Out
+scriptversionRead <- "2.0-030618"
+# Capture R version system information
+cap_version <- version
+
 # Main Menu R Script
 # Allows for user to select options without having to entirely reload or restart the analysis process
 
