@@ -40,7 +40,7 @@ if(userInputdir == 1)
   plot(Ag.gof.03) #Generates a plot for the GOF model 3
   Ag.gof.03.global <- gof(Ag.model.03~esp+distance) #Determines model for all other patterns. Degree cannot be used for directed sets
   plot(Ag.gof.03.global) #Plots the GOF model for all other potential variables besides mdoel
-  cat("MCMC Diagnostics for Ag.model.03")
+  cat("MCMC Diagnostics for Ag.model.03\n")
   mcmc.diagnostics(Ag.model.03) #Generates the diagnostic data and plot for modeling 3
 }
 
