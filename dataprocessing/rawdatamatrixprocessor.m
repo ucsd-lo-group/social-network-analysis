@@ -53,40 +53,9 @@ r0 = fillmissing(r,'constant',0);
 % vall function will process all the question and response data into one column in order of sequence
 vall = q0+r0;
 
-%% Number of participants in the group
-% num_participants_active is the number of active participants in the group (both q and r)
-num_participants_active = size(unique(vall(vall ~= 0)),1);
-disp('Calculated Number of Active Participants...')
-fprintf('STATUS: The total number of ACTIVE participants is %d. \n',num_participants_active)
-
-% prompt user for possible non-participants
-disp(' ')
-num_participants_inactive = round(input('Number of non-participating members (integer >= 0, decimals are rounded): '));
-% number of inactive participants cannot be negative
-while num_participants_inactive < 0
-    num_participants_inactive = input('Sorry, you entered an invalid value, please enter a valid value: ');
-    % If user fails to enter a valid number greater than or equal to 0, the script will reprompt until a valid value has been entered.
-end
-
-% num_participants_total is the number of total participants
-num_participants_total = num_participants_active + num_participants_inactive; 
-
-% Confirm total number of participants: If value is not correct, script will terminate.
-fprintf('STATUS: You have entered %d, as number of non-participating members. \n', num_participants_inactive)
-fprintf('STATUS: If the value was not an integer, it has been automatically rounded for you. \n')
-fprintf('STATUS: Your total number of participants is %d. Please note that this value will be used for necessary calculations. \n', num_participants_total)
-maxconfirm=input('Confirm by entering 1 if the value is correct: ');
-    if maxconfirm == 1
-        disp('Processing...')
-    else
-        disp('STATUS: The script has been paused, stop the script before continuing. It is recommended that you clear your workspace.')
-        disp('STATUS: Please re-run this section and re-enter the proper value.')
-        disp('STATUS: Press CTRL+C for Windows to terminate the script')
-        pause
-    end
-% num_participants_total is the number of total participants in the group
-% num_participants_active is the number of ACTIVE participants in the group
-% num_participants_inactive is the number of non-participants that the user will enter to the script
+%% Get number of participants
+% Make a conservative estimate (may be higher than actual)
+num_participants_possible = max(vall); 
 
 %% Total number of interactions 
 % intot determines the total number of interactions the members in the group has. Based on the vall matrix grid.
@@ -106,19 +75,18 @@ disp('Discussion order has been created.')
 
 %% Student Matrix Interactions
 % Determines the number of times students interact with one another in a directed manner
-% master_all is a n^2 x 3 matrix, format (source, target, weight)
-%   contains all edges
-% master is the same as master_all, except without edges weight <= 0
+% master_all is a n x 3 matrix, format (source, target, weight) contains all edges
+% master is the same as master_all, except without edges where weight <= 0
 
 % Make all possible edges, initialize weight to zero
 disp('Script is preallocating vector size for all possible combinations...')
-    master_all = zeros(num_participants_total*num_participants_total, 3);
+    master_all = zeros(num_participants_possible*num_participants_possible, 3);
 disp('Preallocation is complete')
 
 disp('Values are being populated...')
-for i = 1: 1: num_participants_total % i = 1, then 2, 3, 4, ... then lastly num_participants_active
-	for j = 1: 1: num_participants_total % j = 1, then 2, 3, 4, ... then lastly num_participants_active
-        row_num = (i-1)*num_participants_total + j; 
+for i = 1: 1: num_participants_possible % i = 1, then 2, 3, 4, ... then lastly num_participants_possible
+	for j = 1: 1: num_participants_possible % j = 1, then 2, 3, 4, ... then lastly num_participants_possible
+        row_num = (i-1)*num_participants_possible + j; 
         master_all(row_num,1) = i;
         master_all(row_num,2) = j;
 	end
@@ -131,14 +99,7 @@ disp('Combination population complete.')
 for i = 1: 1: size(vallm)
    source = vallm(i,1);
    target = vallm(i,2);
-   master_all((source-1)*num_participants_total + target, 3) = master_all((source-1)*num_participants_total + target, 3) + 1;
-end
-
-for i = 1: i: sum(master_all(:,3) <= 0) % 1,2,...number of rows with weight <= 0
-    num_zeros_filled = 0;
-    if (master_all(i,3) > 0)
-       
-    end
+   master_all((source-1)*num_participants_possible + target, 3) = master_all((source-1)*num_participants_possible + target, 3) + 1;
 end
 
 % make master
