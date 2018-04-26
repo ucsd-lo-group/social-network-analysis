@@ -1,6 +1,9 @@
 # Reinitializes the matrix for network/statnet package
 A<-get.adjacency(g)
-Ag <- network::as.network(as.matrix(A),directed = TRUE)
+# Sets if network is directed or undirected for stats
+ifelse(userInputdir == 1, stat_dir <- TRUE, stat_dir <- FALSE)
+# Prepares data for modeling
+Ag <- network::as.network(as.matrix(A),directed = stat_dir)
 
 # Notes: A good Goodness of Fit model would have the trendline between the datasets
 
