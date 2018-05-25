@@ -54,9 +54,9 @@ graph_weighted <- is.weighted(g)
 cat("Are self-interactions allowed in your network diagram? \n")
 userInputselfinteract <- readline("[1 for Yes/0 for No]: \t")
 
-if(userInputselfinteract == 1 || userInputselfinteract == 0)
-  {
-    ifelse(userInputselfinteract == 1, self_interact_permission <- "TRUE", self_interact_permission <- "FALSE")
+if(userInputselfinteract == 1 || userInputselfinteract == 0){
+  ifelse(userInputselfinteract == 1, self_interact_permission <- "TRUE", self_interact_permission <- "FALSE")
+  g <- simplify(g, remove.loops = TRUE)
   }
 
 # Creates Graph Adjacency Matrix
