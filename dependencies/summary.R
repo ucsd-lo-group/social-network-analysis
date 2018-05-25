@@ -34,7 +34,7 @@ if(export_approval ==1)
 {
   sink(file=paste(project_name, ".txt"), append = FALSE, type = c("output"), split = FALSE)
 }
-#----------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -----------
+#----------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -----------#
 cat("University of California, San Diego - Lo Lab Group\n")
 cat("Social Network Analysis Script Results\n")
 cat("Summary of Project\n")
@@ -206,7 +206,7 @@ if(diagn_on == 1)
   cat("\n")
 }
 
-#----------- NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED -----------
+#----------- NO SUMMARY DATA BELOW THIS LINE - DATA BELOW THIS LINE WILL NOT BE EXPORTED -----------#
 # Turns off console export and returns normal echo back to console
 if(export_approval ==1)
 {
