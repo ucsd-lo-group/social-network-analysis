@@ -1,15 +1,19 @@
+# Network Stats
+# UCSD Lo Lab Group Social Network Analysis Script
+# MIT License
+# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+
 # Reinitializes the matrix for network/statnet package
 A<-get.adjacency(g)
 # Sets if network is directed or undirected for stats
-ifelse(userInputdir == 1, stat_dir <- TRUE, stat_dir <- FALSE)
+ifelse(directioninput == "y" || directioninput == "Y", stat_dir <- TRUE, stat_dir <- FALSE)
 # Prepares data for modeling
 Ag <- network::as.network(as.matrix(A),directed = stat_dir)
 
 # Notes: A good Goodness of Fit model would have the trendline between the datasets
 
 # If data direction is undirected, execute the following statistical analysis
-if(userInputdir == 0)
-  {
+if(directioninput == "n" || directioninput == "N"){
   # Generates ERGM model based on Bernoulli (Density as homogenous edge density)
   Ag.formula.01 <- formula(Ag~edges) #Base formula for the Bernoilli 
   Ag.model.01 <- ergm(Ag.formula.01) #Ergm Model calculation
@@ -33,8 +37,7 @@ if(userInputdir == 0)
   mcmc.diagnostics(Ag.model.02) #Generates the diagnostics data and plot for modeling 2
 }
 
-if(userInputdir == 1)
-  {
+if(directioninput == "y" || directioninput == "Y"){
   # Generates ERGM model based on Directed ties
   Ag.formula.03 <- formula(Ag~edges + mutual) #Base formula for calculating directed ties
   Ag.model.03 <- ergm(Ag.formula.03) #Ergm model calculation

@@ -1,49 +1,43 @@
-# Start R script
-# Set working directory and execute based on dependencies file
-# Check user directory
-cat('Your current working directory is:\n')
-getwd() # Gets current working directory
-checkwdloc <- readline('Please confirm this is the root directory of the script [1 for yes or [ENTER]/0 for no]: \t')
-if(checkwdloc == 0)
-{
-  # Asks user to define current directory of files
-  getscriptdir <- readline('Enter your directory of the script files (No quotes): \t')
-  setwd(getscriptdir) #Sets working directory based on user input
-}
-
-# Executes Directory Verification Script
-source('setdircheck.R',echo = FALSE)
-
-# Code Version Check
-# Sets current script version for Info Print Out
-scriptversionRead <- "2.0-030618"
-# Capture R version system information
-cap_version <- version
-
-# Introduction
+# Script Loader
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
 # Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
-# Principal Investigator: Stanley M. Lo
-cat("UCSD Lo Lab Group Social Network Analysis Script\n")
-cat("Written by Albert Chai, Joshua P.Le, and Andrew S. Lee\n")
-cat("MIT License\n")
-cat("Current Script Engine Version Build: ", scriptversionRead)
-cat("\n")
-cat("Please read the man pages on the GitHub Repository for more instructions\n")
-invisible(readline(prompt="Press [enter] to continue\n"))
 
-# Check Workspace if used before
-checkwksp <- readline('Are you using data from a previous script session? [1 for yes/0 for no]\t')
-if(checkwksp == 0)
-{
+# Welcome Message
+cat('UCSD Lo Lab Group Social Network Analysis Script\n')
+cat('MIT License\n')
+cat('Written by Albert Chai, Joshua P. Le, and Andrew S. Lee\n')
+cat('\n')
+cat('Please read the man pages on GitHub for detailed instructions\n')
+invisible(readline(prompt = "Press [enter] to continue\n"))
+
+# Check User Directory
+cat('Your current working directory is: \n')
+print(getwd()) #Gets users current working directory
+checkwdloc <- readline('Please confirm that this is the correct directory [y/n]: ')
+if(checkwdloc == "n" || checkwdloc == "N"){
+  # Ask user to define the current working directory of project files
+  getcorrdir <- readline('Enter the directory of where the script files are located (no quotes): ')
+  setwd(getcorrdir) # Sets working directory based on user input
+}
+
+# Run directory verification script
+source('setdircheck.R', echo = FALSE)
+
+# Checks Workspace Environment Variables
+checkwksp <- readline('Are you using data from a previous script session? [y/n]: ')
+if(checkwksp == "n" || checkwksp == "N"){
+  # Clear environmental variables
+  rm(list=ls())
   # Initialize Loader Variables
   datacollect <- 0
   core <- 0
+  netinitconfig <- 0
+  plot <- 0
   subgroups <- 0
   stats <- 0
+  stopscripting <- 0
 }
 
-# Checks for Pre-requisite Libraries
 # Loads external script to check for package dependencies
-source('dependencies/libraries.R',echo = FALSE)
+source('dependencies/libraries.R', echo = FALSE)

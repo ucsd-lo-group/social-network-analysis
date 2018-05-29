@@ -1,18 +1,20 @@
 # Core Basic Analysis Parameters
+# UCSD Lo Lab Group Social Network Analysis Script
+# MIT License
+# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+
 # Edge Count
 nedge <- ecount(g)
 
 # Edge Weighted Count
-if(userInputweightaccept==1)
-{
-  nedge_weighted <- sum(importedData_weight)
+if(weightinput == "Y" || weightinput == "y"){
+  nedge_weighted <- sum(weight_list)
 }
 # Node Count
 nnode <- gorder(g)
 
 # Density (with self interactions allowed, user prompt)
-ifelse(userInputdir ==1, den <- edge_density(g, loops=self_interact_permission), den <- (edge_density(g, loops=self_interact_permission)/2))
-
+den <- edge_density(g,loops = selfallowvar)
 # Degrees of all nodes
 inoutdeg <- degree(g)
 
@@ -26,7 +28,7 @@ degavg <- (mean(degree(g))/2)
 avg_path <- average.path.length(g)
 
 # Diameter of graph
-diam_longest <- diameter(g, directed = outcomeBool)
+diam_longest <- diameter(g, directed = dirvalue)
 
 # Reciprocity of Network
 recip <- reciprocity(g, mode = "default")
@@ -41,9 +43,9 @@ membershipvec <- cluster_walktrap(g)
 submod <- modularity(membershipvec)
 
 # Calculate modularity can be calculated based on graph directionality (must be undirected)
-if(userInputdir == 0)
+if(directioninput == "Y" || directioninput == "y")
 {
-  if(userInputweightaccept==1)
+  if(weightinput == "Y" || weightinput == "y")
   {
     relsubmod <- modularity(g, membership(membershipvec), weights = g_weight)
   }
@@ -51,16 +53,16 @@ if(userInputdir == 0)
 }
 
 # Get.Graph Diameter
-get_graph_diameter <- get.diameter(g, directed = outcomeBool)
+get_graph_diameter <- get.diameter(g, directed = dirvalue)
 
 # Centrality of Network Members
 central <- centr_degree(g, mode = c("all", "out", "in", "total"), loops = FALSE, normalized = TRUE)
 
 # Centrality based on Eigenvector Centrality
-centeigen <- centr_eigen(g,directed = userInputdir, scale = TRUE, normalized = TRUE)
+centeigen <- centr_eigen(g,directed = dirvalue, scale = TRUE, normalized = TRUE)
 
 # Centrality based on Betweenness
-centbtwn <- centralization.betweenness(g, directed = userInputdir, normalized = TRUE)
+centbtwn <- centralization.betweenness(g, directed = dirvalue, normalized = TRUE)
 
 # Articulation Points List 
 # Articuation points or cut vertices are vertices whose removal increases the number of connected components in a graph.

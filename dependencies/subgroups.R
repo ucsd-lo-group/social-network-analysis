@@ -1,4 +1,8 @@
-######### Subgraphs and Modularity #########
+# Subgraphs and Modularity
+# UCSD Lo Lab Group Social Network Analysis Script
+# MIT License
+# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+
 # Section only executes if there is a subgroup present detected by max_clique check
 pre_check_clique_pres <- count_max_cliques(g)
 if(pre_check_clique_pres >=2)
