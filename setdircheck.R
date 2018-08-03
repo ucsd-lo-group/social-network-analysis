@@ -5,3 +5,5 @@
 
 cat('Directory has been set successfully \n')
 cat('\n')
+
+dirsettrue <- 1

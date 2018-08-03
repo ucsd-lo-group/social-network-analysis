@@ -22,22 +22,27 @@ if(checkwdloc == "n" || checkwdloc == "N"){
 }
 
 # Run directory verification script
-source('setdircheck.R', echo = FALSE)
-
-# Checks Workspace Environment Variables
-checkwksp <- readline('Are you using data from a previous script session? [y/n]: ')
-if(checkwksp == "n" || checkwksp == "N"){
-  # Clear environmental variables
-  rm(list=ls())
-  # Initialize Loader Variables
-  datacollect <- 0
-  core <- 0
-  netinitconfig <- 0
-  plot <- 0
-  subgroups <- 0
-  stats <- 0
-  stopscripting <- 0
+if(checkwdloc == "" || checkwdloc == "Y" || checkwdloc == "y"){
+  source('setdircheck.R', echo = FALSE)
 }
 
-# Loads external script to check for package dependencies
-source('dependencies/libraries.R', echo = FALSE)
+# Remainder of script only runs if the Set Directory Check Script has ran, based on variable set
+if(dirsettrue ==1){
+  # Checks Workspace Environment Variables
+  checkwksp <- readline('Are you using data from a previous script session? [y/n]: ')
+  if(checkwksp == "n" || checkwksp == "N"){
+    # Clear environmental variables
+    rm(list=ls())
+    # Initialize Loader Variables
+    datacollect <- 0
+    core <- 0
+    netinitconfig <- 0
+    plot <- 0
+    subgroups <- 0
+    stats <- 0
+    stopscripting <- 0
+  }
+  
+  # Loads external script to check for package dependencies
+  source('dependencies/libraries.R', echo = FALSE)
+}
