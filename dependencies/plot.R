@@ -34,6 +34,16 @@ V(g)$color <- ifelse(node_data_clean$raw_data.node_gender == "male", "lightblue"
 plot(g, edge.width = E(g)$weight, edge.color = "black", edge.curved = FALSE, vertex.size=as.matrix(node_data_clean$raw_data.node_weight))
 title(project_title)
 
+# Automatically Save Plot to Working Directory
+# Saves file as a Portable Document Format (PDF)
+dev.copy(pdf, paste(project_title,".pdf"))
+dev.off()
+
+# Saves file as a PNG Image
+dev.copy(png, paste(project_title,".png"))
+dev.off()
+
+
 # Based on main menu option, execute auto or return to menu
 plot <- 1
 if(autoscriptrun==1){
