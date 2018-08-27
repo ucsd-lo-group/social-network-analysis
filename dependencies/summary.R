@@ -38,7 +38,7 @@ if(export_approval == "Y" || export_approval == "y"){
   export_results_file <- readline('Do you want your results to be exported in a text file? [y/n]: ')
   # Console begins printing results to the file directly
   if(export_results_file == "y" || export_results_file == "Y"){
-    sink(file=paste(project_title,".txt"), append = FALSE, type = c("output"), split = FALSE)
+    sink(file=paste0(project_title,".txt"), append = FALSE, type = c("output"), split = FALSE)
   }
   #------------------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -------------------
   cat('UC San Diego, Lo Lab Group\n')
