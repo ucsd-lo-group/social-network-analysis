@@ -1,7 +1,7 @@
 # Plot Network
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Asks user on the type of network project to be plotted
 cat('Please select the graph project you want to plot. Options include: \n')

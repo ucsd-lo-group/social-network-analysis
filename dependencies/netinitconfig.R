@@ -1,7 +1,7 @@
 # Network Initial Configuration
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Request data input from user and file selection
 # Request project name

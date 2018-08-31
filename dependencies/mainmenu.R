@@ -2,7 +2,7 @@
 # Allows for user to select options without having to entirely reload or restart the analysis process
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Sets script version for print out
 scriptversionread <- "3.0-05172018"
@@ -31,7 +31,8 @@ menuselect <- readline('Selection: \t')
 # Terminates script based on false statement
 if(menuselect == 0 || menuselect == 1 || menuselect == 2 || menuselect == 3 || 
    menuselect == 4 || menuselect == 5 || menuselect == 6 || menuselect == 7 || 
-   menuselect == 8 || menuselect == 9 || menuselect == 10 || menuselect == 11)
+   menuselect == 8 || menuselect == 9 || menuselect == 10 || menuselect == 11
+   )
 {
 if(menuselect==0){
   cat("Thank you for using the script\n")
