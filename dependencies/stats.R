@@ -1,7 +1,7 @@
 # Network Stats
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Reinitializes the matrix for network/statnet package
 A<-get.adjacency(g)

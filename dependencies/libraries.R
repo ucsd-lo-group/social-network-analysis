@@ -1,7 +1,7 @@
 # Install Dependencies
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Installs required packages before executing the main program
 

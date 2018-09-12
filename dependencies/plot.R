@@ -1,7 +1,7 @@
 # Plot Network
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Asks user on the type of network project to be plotted
 cat('Please select the graph project you want to plot. Options include: \n')
@@ -33,6 +33,16 @@ V(g)$color <- ifelse(node_data_clean$raw_data.node_gender == "male", "lightblue"
 # Plot the final network diagram
 plot(g, edge.width = E(g)$weight, edge.color = "black", edge.curved = FALSE, vertex.size=as.matrix(node_data_clean$raw_data.node_weight))
 title(project_title)
+
+# Automatically Save Plot to Working Directory
+# Saves file as a Portable Document Format (PDF)
+dev.copy(pdf, paste(project_title,".pdf"))
+dev.off()
+
+# Saves file as a PNG Image
+dev.copy(png, paste(project_title,".png"))
+dev.off()
+
 
 # Based on main menu option, execute auto or return to menu
 plot <- 1

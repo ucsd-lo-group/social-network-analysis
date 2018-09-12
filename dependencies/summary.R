@@ -1,7 +1,7 @@
 # Export of Summary of Important Variables of Analysis
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Basic Minimum Requirement in order to run summary scripts
 cat('You are required to have ran the Initial Network Configuration option to continue\n')
@@ -20,6 +20,7 @@ cat('Data Collection: ', datacollect, '\n')
 cat('Initial Network Configuration: ', netinitconfig, '\n')
 cat('Plot Network: ', plot, '\n')
 cat('Core: ', core, '\n')
+cat('Core Legacy: ', corelegacy, '\n')
 cat('Subgroups Analysis: ', subgroups, '\n')
 cat('Network Statistics: ', stats, '\n')
 cat('\n')
@@ -38,7 +39,7 @@ if(export_approval == "Y" || export_approval == "y"){
   export_results_file <- readline('Do you want your results to be exported in a text file? [y/n]: ')
   # Console begins printing results to the file directly
   if(export_results_file == "y" || export_results_file == "Y"){
-    sink(file=paste(project_title,".txt"), append = FALSE, type = c("output"), split = FALSE)
+    sink(file=paste(project_title,".txt",sep=""), append = FALSE, type = c("output"), split = FALSE)
   }
   #------------------- SUMMARY DATA BEGINS BELOW THIS LINE FOR EXPORT -------------------
   cat('UC San Diego, Lo Lab Group\n')
@@ -46,13 +47,13 @@ if(export_approval == "Y" || export_approval == "y"){
   cat('Project Summary\n')
   cat('Current Script Engine Version Build: ', scriptversionread, '\n')
   cat('\n')
-  cat('----------------------------------PROJECT DETAILS----------------------------------\n')
+  cat('-----------------------------PROJECT DETAILS-----------------------------\n')
   cat('Name of Project: ', project_title, '\n')
   cat("Summary Results Generated On: ")
   print(Sys.time())
   cat('\n')
   if(netinitconfig == 1){
-    cat('----------------------------------NETWORK CONFIGURATION----------------------------------\n')
+    cat('-----------------------------NETWORK CONFIGURATION-----------------------------\n')
     cat('Weighted Graph: ',graph_weighted, '\n')
     cat('Self-Interactions Allowed: ', selfallowvar, '\n')
     cat('Graph Directed: ', dirvalue, '\n')
@@ -62,7 +63,7 @@ if(export_approval == "Y" || export_approval == "y"){
     cat('\n')
   }
   if(core == 1){
-    cat('----------------------------------CORE PARAMETERS ANALYSIS----------------------------------\n')
+    cat('-----------------------------CORE PARAMETERS ANALYSIS-----------------------------\n')
     cat('Number of Edges: ', nedge, '\n')
     cat('Number of Nodes: ', nnode, '\n')
     if(weightinput == "y" || weightinput == "Y"){
@@ -82,14 +83,8 @@ if(export_approval == "Y" || export_approval == "y"){
     cat('\n')
     cat('Unrestricted Modularity: ', submod, '\n')
     cat('-----------------NETWORK CENTRALITY-----------------\n')
-    cat('Overall Network Centrality: \n')
+    cat('Degree Centrality: \n')
     print(central)
-    cat('\n')
-    cat('Eigenvector Centrality: \n')
-    print(centeigen)
-    cat('\n')
-    cat('Betweeness Centrality: \n')
-    print(centbtwn)
     cat('\n')
     cat('Articulation Points List: \n')
     print(artpoint)
@@ -98,7 +93,7 @@ if(export_approval == "Y" || export_approval == "y"){
   }
   if(subgroups == 1){
     if(pre_check_clique_pres >=2){
-      cat('----------------------------------SUBGROUPS AND MODULARITY----------------------------------\n')
+      cat('-----------------------------SUBGROUPS AND MODULARITY-----------------------------\n')
       cat("Overview of Possible Cliques: \n")
       print(overview_clique_table)
       cat("\n")
@@ -142,7 +137,7 @@ if(export_approval == "Y" || export_approval == "y"){
       cat('\n')
   }
   if(stats == 1){
-    cat('----------------------------------NETWORK STATISTICS----------------------------------\n')
+    cat('-----------------------------NETWORK STATISTICS-----------------------------\n')
     if(stats ==1){
       if(userInputdir == 0){
         cat('formula(Ag~edges)')
@@ -169,7 +164,7 @@ if(export_approval == "Y" || export_approval == "y"){
       cat('\n')
     }
   }
-    cat("------------------DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE------------------\n")
+    cat("----------------DISCLAIMER AND WARRANTY OF PROVIDED RESULTS AND CODE----------------\n")
     cat(
       {"The researcher(s) are primary responsible for the interpretation of the results 
         presented here with the script. The authors accept no liability for any errors that
@@ -179,7 +174,7 @@ if(export_approval == "Y" || export_approval == "y"){
       })
     cat("From the Cats at the Lo Lab Group\n")
     cat("MIT License\n")
-    cat("Copyright (c) 2018 Albert Chai, Joshua P. Le, Andrew S. Lee, and Stanley M. Lo\n")
+    cat("Copyright (c) 2018 Albert Chai, Andrew S. Lee, Joshua P. Le, and Stanley M. Lo\n")
     cat("\n")
     cat(
       {"Permission is hereby granted, free of charge, to any person obtaining a copy
