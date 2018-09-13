@@ -37,12 +37,14 @@ disp(' ')
 % correct for the error.
 % Output of the data in the command window is automatically surpressed. To see the output, remove the ';'
 % (semicolon) from the code.
-disp('Please indicate the file name with extension in single quotes in your MATLAB Workspace Working Directory')
-disp("such as 'case3-raw.csv'")
+disp('Please indicate the file name with extension in your MATLAB Workspace Working Directory')
+disp("such as case3-raw.csv")
 disp('MATLAB will reprompt you for the file if the syntax is incorrect!')
-userInput = input('File: ');
+userInput = input('File: ', 's');
 [q,r] = importfile(userInput);
 disp('Data import has been completed...')
+
+project_name = input('Project name (press Enter if none): ', 's');
 
 %% Question and Response Matrix Creation
 % vs is one matrix containing both q and r data
@@ -112,23 +114,42 @@ master = master_all(master_all(:,3) > 0, :);
 % and one with weight list corresponding to the edge list.
 
 % Writes Edges List
-% parameters
+% config parameters
 edges = master(:,1:2);
 edges_hdr = 'source,target';
-edges_file = 'edge_list.csv';
+edges_file = 'edge.csv';
+if not(strcmp(project_name, ''))
+    edges_file = strcat(project_name, '-', edges_file);
+end
 
 % the actual write
 dlmwrite(edges_file, edges_hdr, 'delimiter', '');
-dlmwrite(edges_file,edges,'delimiter',',','-append');
+dlmwrite(edges_file,edges, 'delimiter', ',', '-append');
 disp(strcat("Edge list has been written, check under ", edges_file))
 
 % Writes Weighted List
-% parameters
+% config parameters
 weights = master(:,3);
 weights_hdr = 'weight';
-weights_file = 'weight_list.csv';
+weights_file = 'weight.csv';
+if not(strcmp(project_name, ''))
+    weights_file = strcat(project_name, '-', weights_file);
+end
 
 % the actual write
 dlmwrite(weights_file, weights_hdr, 'delimiter', '');
-dlmwrite(weights_file,weights,'delimiter',',','-append');
+dlmwrite(weights_file,weights, 'delimiter', ',', '-append');
 disp(strcat("Weight list has been written, check under ", weights_file))
+
+% Writes Edges and Weighted List
+% config parameters
+master_hdr = 'source,target,weight';
+master_file = 'master-edge-weight.csv';
+if not(strcmp(project_name, ''))
+    master_file = strcat(project_name, '-', master_file);
+end
+
+% the actual write
+dlmwrite(master_file, master_hdr, 'delimiter', '');
+dlmwrite(master_file, master, 'delimiter', ',', '-append');
+disp(strcat("Master (edge and weight) list has been written, check under ", master_file))
