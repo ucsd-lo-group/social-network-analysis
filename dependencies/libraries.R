@@ -71,8 +71,14 @@ stopifnot(check_igraph_install==TRUE && check_ergm_install == TRUE &&
   cat("The necessary libraries have been installed and updated...\n")
   cat("Loading the main menu...\n")
   cat("\n")
-  # Loads the main menu script
-  source('dependencies/mainmenu.R')
+  # Loads the main menu script for Interactive Mode
+  if(automationFull == 0){
+    source('dependencies/mainmenu.R')
+  }
+  # Loads the main menu script for Automation Mode
+  if(automationFull == 1){
+    source('dependencies/fullprojectauto.R')
+  }
 }
 if(check_igraph_install==FALSE || check_ergm_install == FALSE || check_sna_install == FALSE ||
    check_network_install == FALSE || check_statnet_install == FALSE || 
