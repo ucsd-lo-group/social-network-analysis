@@ -27,11 +27,19 @@ if(graph_selection_input == 3){
   graph_layout_select <- "Bipartite"
 }
 
-# Adds color to nodes on plot
-V(g)$color <- ifelse(node_data_clean$raw_data.node_gender == "male", "lightblue", "pink")
+# Asks if user has demographic/gender data
+genderInputRequest <- readline('Do you have demographic/gender information in your datafile? [y/n]: ')
+if(genderInputRequest == "Y" || genderInputRequest == "y"){
+  # Adds color to nodes on plot
+  V(g)$color <- ifelse(node_data_clean$raw_data.node_gender == "male", "lightblue", "pink")
+  # Plot the final network diagram
+  plot(g, edge.width = E(g)$weight, edge.color = "black", edge.curved = FALSE, vertex.size=as.matrix(node_data_clean$raw_data.node_weight))
+  title(project_title)
+}
 
+# If user does not have any demographic data to append to graph
 # Plot the final network diagram
-plot(g, edge.width = E(g)$weight, edge.color = "black", edge.curved = FALSE, vertex.size=as.matrix(node_data_clean$raw_data.node_weight))
+plot(g, edge.width = E(g)$weight, edge.color = "black", edge.curved = FALSE)
 title(project_title)
 
 # Automatically Save Plot to Working Directory

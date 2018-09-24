@@ -1,12 +1,12 @@
 # Script Loader
 # UCSD Lo Lab Group Social Network Analysis Script
 # MIT License
-# Written by Albert Chai, Joshua P. Le, and Andrew S. Lee
+# Written by Albert Chai, Andrew S. Lee and Joshua P. Le
 
 # Welcome Message
 cat('UCSD Lo Lab Group Social Network Analysis Script\n')
 cat('MIT License\n')
-cat('Written by Albert Chai, Joshua P. Le, and Andrew S. Lee\n')
+cat('Written by Albert Chai, Andrew S. Lee, and Joshua P. Le\n')
 cat('\n')
 cat('Please read the man pages on GitHub for detailed instructions\n')
 invisible(readline(prompt = "Press [enter] to continue\n"))

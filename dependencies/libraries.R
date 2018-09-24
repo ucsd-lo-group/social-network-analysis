@@ -9,6 +9,8 @@
 cat("Loading dependencies script... The cats are working... \n")
 
 # Checks if required libraries are installed
+check_matlabr_install <- require('matlabr')
+check_R.matlab_install <- require('R.matlab')
 check_sna_install <- require('sna')
 check_network_install <- require('network')
 check_ergm_install <- require('ergm')
@@ -39,7 +41,15 @@ if(check_coda_install == FALSE){
 if(check_latticeExtra_install == FALSE){
   install.packages('latticeExtra')
 }
+if(check_matlabr_install == FALSE){
+  install.packages('matlabr')
+}
+if(check_R.matlab_install == FALSE){
+  install.packages('R.matlab')
+}
 # Check if all dependencies are installed after post-install of missing packages
+check_matlabr_install <- require('matlabr')
+check_R.matlab_install <- require('R.matlab')
 check_sna_install <- require('sna')
 check_network_install <- require('network')
 check_ergm_install <- require('ergm')
@@ -52,7 +62,8 @@ check_igraph_install <- require('igraph')
 stopifnot(check_igraph_install==TRUE && check_ergm_install == TRUE && 
             check_sna_install == TRUE && check_network_install == TRUE && 
             check_statnet_install == TRUE && check_coda_install == TRUE && 
-            check_latticeExtra_install == TRUE)
+            check_latticeExtra_install == TRUE && check_matlabr_install == TRUE &&
+            check_R.matlab_install == TRUE)
 {
   cat("We will attempt to update your packages to the latest version\n")
   # Runs updates on packages if already installed before
@@ -65,7 +76,8 @@ stopifnot(check_igraph_install==TRUE && check_ergm_install == TRUE &&
 }
 if(check_igraph_install==FALSE || check_ergm_install == FALSE || check_sna_install == FALSE ||
    check_network_install == FALSE || check_statnet_install == FALSE || 
-   check_coda_install == FALSE || check_latticeExtra_install == FALSE){
+   check_coda_install == FALSE || check_latticeExtra_install == FALSE || check_matlabr_install == FALSE ||
+   check_R.matlab_install == FALSE){
   stop("The script will run into an error if one of these dependencies failed to install.\n,
        Please check your system settings and try running the dependencies installer again. \n")
 }

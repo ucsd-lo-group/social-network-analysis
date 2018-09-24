@@ -5,7 +5,7 @@
 # Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
 # Sets script version for print out
-scriptversionread <- "3.0-05172018"
+scriptversionread <- "3.0-092418"
 # Capture R version system information
 cap_version <- version
 
@@ -25,13 +25,15 @@ cat('8. Statistical Analysis\n')
 cat('9. Summary Report Print\n')
 cat('10. Text Counter Analyzer\n')
 cat('11. Restore Last Known g_original Graph Adj Matrix\n')
+cat('99. MATLAB Automation Script from R - Data Entry')
 menuselect <- readline('Selection: \t')
 
 # Switch Options
 # Terminates script based on false statement
 if(menuselect == 0 || menuselect == 1 || menuselect == 2 || menuselect == 3 || 
    menuselect == 4 || menuselect == 5 || menuselect == 6 || menuselect == 7 || 
-   menuselect == 8 || menuselect == 9 || menuselect == 10 || menuselect == 11
+   menuselect == 8 || menuselect == 9 || menuselect == 10 || menuselect == 11 ||
+   menuselect == 99
    )
 {
 if(menuselect==0){
@@ -93,7 +95,8 @@ if(menuselect==8){
 if(menuselect==9){
   autoscriptrun <- 0
   source('dependencies/summary.R')
-}
+}# Returns the working directory back to the main
+
 # Loads the Text Counter Analyzer
 if(menuselect == 10){
   autoscriptrun <- 0
@@ -104,5 +107,10 @@ if(menuselect == 11){
   autoscriptrun <- 0
   g <- g_original
   source('dependencies/mainmenu.R')
+}
+# Loads the MATLAB Automation Script
+if(menuselect == 99){
+  autoscriptrun <- 0
+  source('dependencies/matlabautomation.R')
 }
 }
