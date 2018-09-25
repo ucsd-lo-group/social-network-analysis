@@ -119,31 +119,31 @@ master = master_all(master_all(:,3) > 0, :);
 % and one with weight list corresponding to the edge list.
 disp('Exporting temporary files...\n')
 
-% Writes Edges List
-% config parameters
-edges = master(:,1:2);
-edges_hdr = 'source,target';
-edges_file = 'edge.csv';
-if not(strcmp(project_name, ''))
-    edges_file = strcat(project_name, '-', edges_file);
-end
+% % Writes Edges List
+% % config parameters
+% edges = master(:,1:2);
+% edges_hdr = 'source,target';
+% edges_file = 'edge.csv';
+% if not(strcmp(project_name, ''))
+%     edges_file = strcat(project_name, '-', edges_file);
+% end
 
-% the actual write
-dlmwrite(edges_file, edges_hdr, 'delimiter', '');
-dlmwrite(edges_file,edges, 'delimiter', ',', '-append');
+% % the actual write
+% dlmwrite(edges_file, edges_hdr, 'delimiter', '');
+% dlmwrite(edges_file,edges, 'delimiter', ',', '-append');
 
-% Writes Weighted List
-% config parameters
-weights = master(:,3);
-weights_hdr = 'weight';
-weights_file = 'weight.csv';
-if not(strcmp(project_name, ''))
-    weights_file = strcat(project_name, '-', weights_file);
-end
+% % Writes Weighted List
+% % config parameters
+% weights = master(:,3);
+% weights_hdr = 'weight';
+% weights_file = 'weight.csv';
+% if not(strcmp(project_name, ''))
+%     weights_file = strcat(project_name, '-', weights_file);
+% end
 
-% the actual write
-dlmwrite(weights_file, weights_hdr, 'delimiter', '');
-dlmwrite(weights_file,weights, 'delimiter', ',', '-append');
+% % the actual write
+% dlmwrite(weights_file, weights_hdr, 'delimiter', '');
+% dlmwrite(weights_file,weights, 'delimiter', ',', '-append');
 
 % Writes Edges and Weighted List
 % config parameters

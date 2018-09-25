@@ -3,39 +3,46 @@
 # MIT License
 # Written by Albert Chai, Andrew S. Lee, and, Joshua P. Le
 
-# Basic Minimum Requirement in order to run summary scripts
-cat('You are required to have ran the Initial Network Configuration option to continue\n')
-invisible(readline('Press [enter] to continue\n'))
-
-# Checks if user ran initnetconfig
-if(netinitconfig == 0){
-  cat('You are being returned to the main menu. Please run the Initial Network Config script\n')
-  source('dependencies/mainmenu.R', echo = FALSE)
+# Request user input
+if(interactive == 1){
+  # Basic Minimum Requirement in order to run summary scripts
+  cat('You are required to have ran the Initial Network Configuration option to continue\n')
+  invisible(readline('Press [enter] to continue\n'))
+  
+  # Checks if user ran initnetconfig
+  if(netinitconfig == 0){
+    cat('You are being returned to the main menu. Please run the Initial Network Config script\n')
+    source('dependencies/mainmenu.R', echo = FALSE)
+  }
+  
+  # Notifies user of the following scripts that have been ran before data export
+  cat('You have completed the following scripts: \n')
+  cat('A value of "1" means the script was completed. \n')
+  cat('Data Collection: ', datacollect, '\n')
+  cat('Initial Network Configuration: ', netinitconfig, '\n')
+  cat('Plot Network: ', plot, '\n')
+  cat('Core: ', core, '\n')
+  cat('Subgroups Analysis: ', subgroups, '\n')
+  cat('Network Statistics: ', stats, '\n')
+  cat('\n')
+  
+  # Requests user approval to continue with data export
+  export_approval <- readline('Do you want to continue data export? [y/n]: ')
+  if(export_approval == "Y" || export_approval == "y"){
+    # Requests if user wants to export results as a text file
+    export_results_file <- readline('Do you want your results to be exported in a text file? [y/n]: ')
+  }
+  
+  # If user says export is FALSE (N), script will return user to the main menu
+  if(export_approval == "N" || export_approval == "n"){
+    source('dependencies/mainmenu.R', echo = FALSE)
+  }
 }
 
-# Notifies user of the following scripts that have been ran before data export
-cat('You have completed the following scripts: \n')
-cat('A value of "1" means the script was completed. \n')
-cat('Data Collection: ', datacollect, '\n')
-cat('Initial Network Configuration: ', netinitconfig, '\n')
-cat('Plot Network: ', plot, '\n')
-cat('Core: ', core, '\n')
-cat('Subgroups Analysis: ', subgroups, '\n')
-cat('Network Statistics: ', stats, '\n')
-cat('\n')
+#**** END USER INPUT REQUEST ****#
 
-# Requests user approval to continue with data export
-export_approval <- readline('Do you want to continue data export? [y/n]: ')
-
-# If user says export is FALSE (N), script will return user to the main menu
-if(export_approval == "N" || export_approval == "n"){
-  source('dependencies/mainmenu.R', echo = FALSE)
-}
-
-# IF user continues with the export process, request user interaction data
+# If user continues with the export process, request user interaction data
 if(export_approval == "Y" || export_approval == "y"){
-  # Requests if user wants to export results as a text file
-  export_results_file <- readline('Do you want your results to be exported in a text file? [y/n]: ')
   # Console begins printing results to the file directly
   if(export_results_file == "y" || export_results_file == "Y"){
     sink(file=paste(project_title,".txt",sep=""), append = FALSE, type = c("output"), split = FALSE)
@@ -212,17 +219,22 @@ if(export_results_file == "y" || export_results_file == "Y"){
   print(getwd())
 }
 
-# Asks user options after summary generation
-cat('------------------------------------------------------------------------------------------------------------\n')
-cat('Please select from the following options: \n')
-cat('0. Quit Script\n')
-cat('1. Return to the Main Menu\n')
-sum_opt_sel <- readline('Selection: ')
-if(sum_opt_sel == 0){
-  cat('The cats will now go back to purring... Thank you for using the script\n')
-  stopscripting <- 1
-  stopifnot(stopscripting == 0)
-}
-if(sum_opt_sel == 1){
-  source('dependencies/mainmenu.R', echo = FALSE)
+# **** BEGIN USER INPUT REQUESTS ****#
+# Request User Inputs
+if(interactive == 1){
+  # Asks user options after summary generation
+  cat('------------------------------------------------------------------------------------------------------------\n')
+  cat('Please select from the following options: \n')
+  cat('0. Quit Script\n')
+  cat('1. Return to the Main Menu\n')
+  sum_opt_sel <- readline('Selection: ')
+  if(sum_opt_sel == 0){
+    cat('The cats will now go back to purring... Thank you for using the script\n')
+    stopscripting <- 1
+    stopifnot(stopscripting == 0)
+  }
+  if(sum_opt_sel == 1){
+    source('dependencies/mainmenu.R', echo = FALSE)
+  }
+  # **** END USER INPUT REQUESTS ****#
 }

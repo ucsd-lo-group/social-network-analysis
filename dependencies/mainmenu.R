@@ -52,13 +52,7 @@ if(menuselect==1){
 if(menuselect==2){
   rm(list=ls())
   # Initialize Loader Variables
-  datacollect <- 0
-  core <- 0
-  netinitconfig <- 0
-  plot <- 0
-  subgroups <- 0
-  stats <- 0
-  stopscripting <- 0
+  source('dependencies/varloader.R')
   source('dependencies/mainmenu.R')
 }
 # Loads Data Entry option

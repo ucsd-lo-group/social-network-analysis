@@ -34,14 +34,7 @@ if(dirsettrue ==1){
     # Clear environmental variables
     rm(list=ls())
     # Initialize Loader Variables
-    datacollect <- 0
-    core <- 0
-    netinitconfig <- 0
-    plot <- 0
-    subgroups <- 0
-    stats <- 0
-    stopscripting <- 0
-    automationFull <- 0
+    source('dependencies/varloader.R', echo = FALSE)
   }
   
   # Loads external script to check for package dependencies

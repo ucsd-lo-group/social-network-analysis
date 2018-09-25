@@ -1,0 +1,6 @@
+nodes,node_weight,node_gender,node_minority
+1,50,male,FALSE
+2,16,female,FALSE
+3,2,male,TRUE
+4,7,female,TRUE
+5,25,male,TRUE
