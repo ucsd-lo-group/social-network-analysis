@@ -46,7 +46,14 @@ run_matlab_script('automatedmatrixprocessor.m', verbose = TRUE, desktop = FALSE)
 raw_data <- read.csv('master-edge-weight.csv', header = headervalue)
 
 # Create the edge and weight lists from raw_data file as data.frames
+cat('Import your raw q/r data file...\n')
 edge_list <- data.frame(raw_data$source, raw_data$target)
+
+# Requests if user attribute file is present
+attribute_data_present <- readline('Do you have attribute data that you want to include? [y/n]: ')
+if(attribute_data_present == "Y" || attribute_data_present == "y"){
+  attribute_data <- read.csv(file.choose(), header = headervalue)
+}
 
 # Sets datacollect variable to TRUE
 datacollect <- 1
@@ -58,7 +65,7 @@ setwd(projectDir)
 core <- 1
 if(autoscriptrun==1)
 {
-  source('dependencies/subgroups.R')
+  source('dependencies/netinticonfig.R')
 }
 if(autoscriptrun==0)
 {
