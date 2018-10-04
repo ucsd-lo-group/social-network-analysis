@@ -18,9 +18,14 @@
 cd fileprocessing
 
 listprocessingraw = ls; %Calls list of items to be processed
-listprocessing = strsplit(listprocessingraw, ' ');
+listprocessing = strsplit(listprocessingraw, {' ','\t','\n','\r'});
 listprocessing = strtrim(listprocessing); %Removes trailing spaces
+listprocessing = listprocessing(1:length(listprocessing)-1);
 for var = listprocessing
+   %Checks for empty strings in the list processing 
+   %if isempty(var)
+   % continue
+   %end
    %Set the file name to be entered into the script
    userInput = var{1};
    project_name = var{1};
