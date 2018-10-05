@@ -34,9 +34,9 @@ if(dirsettrue ==1){
     # Clear environmental variables
     rm(list=ls())
     # Initialize Loader Variables
-    source('dependencies/varloader.R', echo = FALSE)
+    source('https://github.com/ucsd-lo-group/graphical-network-tool/blob/master/dependencies/varloader.R', echo = FALSE)
   }
   
   # Loads external script to check for package dependencies
-  source('dependencies/libraries.R', echo = FALSE)
+  source('https://github.com/ucsd-lo-group/graphical-network-tool/blob/master/dependencies/libraries.R', echo = FALSE)
 }
