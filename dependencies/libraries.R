@@ -8,66 +8,47 @@
 # Notifies user the dependency script is running
 cat("Loading dependencies script... The cats are working... \n")
 
-# Checks if required libraries are installed
-check_matlabr_install <- require('matlabr')
-check_R.matlab_install <- require('R.matlab')
-check_sna_install <- require('sna')
-check_network_install <- require('network')
-check_ergm_install <- require('ergm')
-check_statnet_install <- require('statnet')
-check_coda_install <- require('coda')
-check_latticeExtra_install <- require('latticeExtra')
-check_igraph_install <- require('igraph')
+# Load the required libraries list
+requireinstall_list <- c('matlabr', 'R.matlab', 'rmarkdown', 'sna', 
+                         'network', 'ergm', 'statnet', 'coda', 
+                         'latticeExtra','igraph')
 
-# If not installed, install packages
-if(check_igraph_install == FALSE){
-  install.packages('igraph')
+# Runs the necessary commands for checking library installs
+for (list in requireinstall_list){
+  # Checks if required libraries are installed
+  eval(parse(text=paste0('check_',list,'_install <- require("',list,'")')))
+  # If not installed, install packages
+  currentpackagecheck <- eval(parse(text=paste0('check_',list,'_install')))
+  if(currentpackagecheck == FALSE){
+    eval(parse(text=paste0('install.packages("',list,'")')))
+  }
+  # Check if all dependencies are installed after post-install of missing packages
+  eval(parse(text=paste0('check_',list,'_install <- require("',list,'")')))
+  
 }
-if(check_ergm_install == FALSE){
-  install.packages('ergm')
-}
-if(check_sna_install == FALSE){
-  install.packages('sna')
-}
-if(check_network_install == FALSE){
-  install.packages('network')
-}
-if(check_statnet_install == FALSE){
-  install.packages('statnet')
-}
-if(check_coda_install == FALSE){
-  install.packages('coda')
-}
-if(check_latticeExtra_install == FALSE){
-  install.packages('latticeExtra')
-}
-if(check_matlabr_install == FALSE){
-  install.packages('matlabr')
-}
-if(check_R.matlab_install == FALSE){
-  install.packages('R.matlab')
-}
-# Check if all dependencies are installed after post-install of missing packages
-check_matlabr_install <- require('matlabr')
-check_R.matlab_install <- require('R.matlab')
-check_sna_install <- require('sna')
-check_network_install <- require('network')
-check_ergm_install <- require('ergm')
-check_statnet_install <- require('statnet')
-check_coda_install <- require('coda')
-check_latticeExtra_install <- require('latticeExtra')
-check_igraph_install <- require('igraph')
 
-# If all installed, continue to script, else ask user and terminate
-stopifnot(check_igraph_install==TRUE && check_ergm_install == TRUE && 
-            check_sna_install == TRUE && check_network_install == TRUE && 
-            check_statnet_install == TRUE && check_coda_install == TRUE && 
-            check_latticeExtra_install == TRUE && check_matlabr_install == TRUE &&
-            check_R.matlab_install == TRUE)
+# Generate initial total package indicator
+packageinstall_indicator <- 0
+# If the proper package is installed on the system, the function will increase the length of
+# the packageinstall_indicator, which serves as a proxy to check that all necessary requirements
+# are met in lieu of listing out each package separately.
+for (list in requireinstall_list){
+  currentpackagecheck <- eval(parse(text=paste0('check_',list,'_install')))
+  if(currentpackagecheck == TRUE){
+    packageinstall_indicator <- packageinstall_indicator + 1
+  }
+}
+
+# If all installed, continue to script, else terminate script
+stopifnot(packageinstall_indicator == length(requireinstall_list))
 {
   cat("We will attempt to update your packages to the latest version\n")
+  
   # Runs updates on packages if already installed before
-  update.packages(c('igraph','statnet','ergm','network','coda','sna','latticeExtra'))
+  for(pack in requireinstall_list){
+    eval(parse(text=paste0('update.packages("', pack,'")')))
+  }
+  
   cat("The necessary libraries have been installed and updated...\n")
   cat("Loading the main menu...\n")
   cat("\n")
@@ -80,10 +61,8 @@ stopifnot(check_igraph_install==TRUE && check_ergm_install == TRUE &&
     source('dependencies/fullprojectauto.R')
   }
 }
-if(check_igraph_install==FALSE || check_ergm_install == FALSE || check_sna_install == FALSE ||
-   check_network_install == FALSE || check_statnet_install == FALSE || 
-   check_coda_install == FALSE || check_latticeExtra_install == FALSE || check_matlabr_install == FALSE ||
-   check_R.matlab_install == FALSE){
+
+if(packageinstall_indicator != length(requireinstall_list)){
   stop("The script will run into an error if one of these dependencies failed to install.\n,
        Please check your system settings and try running the dependencies installer again. \n")
 }

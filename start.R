@@ -14,7 +14,7 @@ invisible(readline(prompt = "Press [enter] to continue\n"))
 # Check User Directory
 cat('Your current working directory is: \n')
 print(getwd()) #Gets users current working directory
-checkwdloc <- readline('Please confirm that this is the correct directory [y/n]: ')
+checkwdloc <- readline('Please confirm that this is the correct directory [Y/n]: ')
 if(checkwdloc == "n" || checkwdloc == "N"){
   # Ask user to define the current working directory of project files
   getcorrdir <- readline('Enter the directory of where the script files are located (no quotes): ')
@@ -29,8 +29,8 @@ if(checkwdloc == "" || checkwdloc == "Y" || checkwdloc == "y"){
 # Remainder of script only runs if the Set Directory Check Script has ran, based on variable set
 if(dirsettrue ==1){
   # Checks Workspace Environment Variables
-  checkwksp <- readline('Are you using data from a previous script session? [y/n]: ')
-  if(checkwksp == "n" || checkwksp == "N"){
+  checkwksp <- readline('Are you using data from a previous script session? [y/N]: ')
+  if(checkwksp == "n" || checkwksp == "N" || checkwksp == ""){
     # Clear environmental variables
     rm(list=ls())
     # Initialize Loader Variables

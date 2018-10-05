@@ -213,7 +213,7 @@ if(export_results_file == "y" || export_results_file == "Y"){
   # Stops Writing to file from console
   sink()
   # Notifies suer that requested export job has been completed
-  cat('Your results have been exported as ',paste(project_title,".txt"), '\n')
+  cat('Your results have been exported as ',paste0(project_title,".txt"), '\n')
   cat('It will be in your current working directory\n')
   cat('Your current working directory is: ')
   print(getwd())

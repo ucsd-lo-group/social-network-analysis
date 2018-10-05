@@ -49,6 +49,7 @@ ifelse(selfinteractinput == "Y" || selfinteractinput == "y", selfallowvar <- TRU
 attribute_data_present <- readline('Do you have attribute data for all networks that you want to include? [y/n]: ')
 if(attribute_data_present == "Y" || attribute_data_present == "y"){
   attribute_data <- read.csv(file.choose(), header = headervalue)
+  genderInputRequest <- readline('Do you want to load the demographic information on the plot? [y/n]: ')
 }
 
 # Asks user on the type of network project to be plotted
