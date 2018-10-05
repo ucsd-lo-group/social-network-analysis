@@ -23,7 +23,7 @@ if(checkwdloc == "n" || checkwdloc == "N"){
 
 # Run directory verification script
 if(checkwdloc == "" || checkwdloc == "Y" || checkwdloc == "y"){
-  source('setdircheck.R', echo = FALSE)
+  source('https://raw.githubusercontent.com/ucsd-lo-group/graphical-network-tool/master/setdircheck.R', echo = FALSE)
 }
 
 # Remainder of script only runs if the Set Directory Check Script has ran, based on variable set
